@@ -1,8 +1,14 @@
+import React from "react";
+import Header from "./Header";
+import Navbar from "./Navbar";
+import "bootswatch/dist/darkly/bootstrap.min.css";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
+    <React.Fragment>
+      <Navbar />
+      <Header />
+    </React.Fragment>
   );
 }
 
