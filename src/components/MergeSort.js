@@ -1,21 +1,39 @@
 import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 
-function mergeSort(arr) {
-  const half = arr.length / 2;
+const mergeSort = (array) => {
+  if (array.length <= 1) {
+    return array;
+  }
+  const middleIndex = Math.floor(array.length / 2);
+  const leftArray = array.slice(0, middleIndex);
+  const rightArray = array.slice(middleIndex);
 
-  // the base case is array length <=1
-  if (arr.length <= 1) {
-    return arr;
+  return merge(mergeSort(leftArray), mergeSort(rightArray));
+};
+
+const merge = (leftArr, rightArr) => {
+  const output = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
+    const leftElement = leftArr[leftIndex];
+    const rightElement = rightArr[rightIndex];
+
+    if (leftElement < rightElement) {
+      output.push(leftElement);
+      leftIndex++;
+    } else {
+      output.push(rightElement);
+      rightIndex++;
+    }
   }
 
-  const left = arr.splice(0, half); // the first half of the array
-  const right = arr;
-  var merge = [...mergeSort(left), ...mergeSort(right)];
-  return merge;
-}
+  return [...output, leftArr.slice(leftIndex), ...rightArr.slice(rightIndex)];
+};
 
-function MergeSort() {
+function MergeSortDisplay() {
   const [arrValues, setArrValues] = useState(() => {
     return RandomArr();
   });
@@ -58,4 +76,4 @@ function MergeSort() {
   );
 }
 
-export default MergeSort;
+export default MergeSortDisplay;

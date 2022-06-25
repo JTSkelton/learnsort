@@ -1,7 +1,7 @@
 import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 
-function qkSort(origArray) {
+function quickSort(origArray) {
   if (origArray.length <= 1) {
     return origArray;
   } else {
@@ -16,12 +16,12 @@ function qkSort(origArray) {
         right.push(origArray[i]);
       }
     }
-    var newArray = [...qkSort(left), pivot, ...qkSort(right)];
+    var newArray = [...quickSort(left), pivot, ...quickSort(right)];
     return newArray;
   }
 }
 
-function QuickSort() {
+function QuickSortDisplay() {
   const [arrValues, setArrValues] = useState(() => {
     return RandomArr();
   });
@@ -30,7 +30,7 @@ function QuickSort() {
   });
 
   function sortThatArray() {
-    setSortedArrValues(qkSort(arrValues));
+    setSortedArrValues(quickSort(arrValues));
   }
 
   function newArray() {
@@ -64,4 +64,4 @@ function QuickSort() {
   );
 }
 
-export default QuickSort;
+export default QuickSortDisplay;

@@ -1,7 +1,7 @@
 import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 
-function bubSort(arr) {
+function bubbleSort(arr) {
   arr.map((e1) =>
     arr.map((e2, i) => {
       if (arr[i] > arr[i + 1]) {
@@ -13,7 +13,7 @@ function bubSort(arr) {
   return arr;
 }
 
-function BubbleSort() {
+function BubbleSortDisplay() {
   const [arrValues, setArrValues] = useState(() => {
     return RandomArr();
   });
@@ -22,7 +22,7 @@ function BubbleSort() {
   });
 
   function sortThatArray() {
-    setSortedArrValues(bubSort(arrValues));
+    setSortedArrValues(bubbleSort(arrValues));
   }
 
   function newArray() {
@@ -56,4 +56,4 @@ function BubbleSort() {
   );
 }
 
-export default BubbleSort;
+export default BubbleSortDisplay;
