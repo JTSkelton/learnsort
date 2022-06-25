@@ -2,23 +2,21 @@ import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 
 function quickSort(origArray) {
-  if (origArray.length <= 1) {
-    return origArray;
-  } else {
-    var left = [];
-    var right = [];
-    var pivot = origArray.pop();
+  if (origArray.length <= 1) return origArray;
 
-    for (var i = 0; i < origArray.length; i++) {
-      if (origArray[i] < pivot) {
-        left.push(origArray[i]);
-      } else {
-        right.push(origArray[i]);
-      }
+  var leftArray = [];
+  var rightArray = [];
+  var pivot = origArray[origArray.length - 1];
+
+  for (var i = 0; i < origArray.length - 1; i++) {
+    if (origArray[i] < pivot) {
+      leftArray.push(origArray[i]);
+    } else {
+      rightArray.push(origArray[i]);
     }
-    var newArray = [...quickSort(left), pivot, ...quickSort(right)];
-    return newArray;
   }
+  var newArray = [...quickSort(leftArray), pivot, ...quickSort(rightArray)];
+  return newArray;
 }
 
 function QuickSortDisplay() {
