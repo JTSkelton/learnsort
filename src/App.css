@@ -1,3 +1,9 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
 .active-algo {
   display: block;
 }
@@ -13,13 +19,27 @@
 }
 
 .displayButton {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+  max-height: 50px;
+  max-width: 1000px;
   background-color: rgb(51, 51, 51);
+  justify-content: center;
+}
+
+.displayButton:nth-of-type(1) {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .currentAlgo {
+  justify-content: left;
   background-color: rgb(51, 51, 51);
 }
 
 .algoCode {
+  min-height: 700px;
+  justify-content: left;
   background-color: rgb(51, 51, 51);
 }

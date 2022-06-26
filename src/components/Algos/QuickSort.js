@@ -37,26 +37,24 @@ function QuickSortDisplay() {
 
   return (
     <div className="QuickSort">
-      <div className="card text-white bg-secondary mb-3">
-        <div className="card-header">Quick Sort</div>
-        <div className="card-body">
-          <button type="button" className="btn btn-success" onClick={newArray}>
-            Generate New Array
-          </button>
-          <br></br>
-          <br></br>
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={sortThatArray}
-          >
-            Quick Sort The Array
-          </button>
-          <br></br>
-          <span>Origional Array: {arrValues}</span>
-          <br></br>
-          <span>Quick Sorted Array: {sortedArrValues}</span>
-        </div>
+      <div className="card-header">Quick Sort</div>
+      <div className="card-body">
+        <button type="button" className="btn btn-success" onClick={newArray}>
+          Generate New Array
+        </button>
+        <br></br>
+        <br></br>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={sortThatArray}
+        >
+          Quick Sort The Array
+        </button>
+        <br></br>
+        <span>Origional Array: {arrValues}</span>
+        <br></br>
+        <span>Quick Sorted Array: {sortedArrValues}</span>
       </div>
     </div>
   );

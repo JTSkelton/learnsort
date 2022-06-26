@@ -3,7 +3,6 @@ import Header from "./Header";
 import Navbar from "./Navbar";
 import Body from "./Body";
 import "bootswatch/dist/darkly/bootstrap.min.css";
-import "../App.css";
 
 function App() {
   return (

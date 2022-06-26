@@ -35,26 +35,24 @@ function SelectionSortDisplay() {
 
   return (
     <div className="SelectionSort">
-      <div className="card text-white bg-secondary mb-3">
-        <div className="card-header">Selection Sort</div>
-        <div className="card-body">
-          <button type="button" className="btn btn-success" onClick={newArray}>
-            Generate New Array
-          </button>
-          <br></br>
-          <br></br>
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={sortThatArray}
-          >
-            Selection Sort The Array
-          </button>
-          <br></br>
-          <span>Origional Array: {arrValues}</span>
-          <br></br>
-          <span>Selection Sorted Array: {sortedArrValues}</span>
-        </div>
+      <div className="card-header">Selection Sort</div>
+      <div className="card-body">
+        <button type="button" className="btn btn-success" onClick={newArray}>
+          Generate New Array
+        </button>
+        <br></br>
+        <br></br>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={sortThatArray}
+        >
+          Selection Sort The Array
+        </button>
+        <br></br>
+        <span>Origional Array: {arrValues}</span>
+        <br></br>
+        <span>Selection Sorted Array: {sortedArrValues}</span>
       </div>
     </div>
   );

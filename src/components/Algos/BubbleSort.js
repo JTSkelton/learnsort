@@ -31,26 +31,24 @@ function BubbleSortDisplay() {
 
   return (
     <div className="BubbleSort">
-      <div className="card text-white bg-secondary mb-3">
-        <div className="card-header">Bubble Sort</div>
-        <div className="card-body">
-          <button type="button" className="btn btn-success" onClick={newArray}>
-            Generate New Array
-          </button>
-          <br></br>
-          <br></br>
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={sortThatArray}
-          >
-            Bubble Sort The Array
-          </button>
-          <br></br>
-          <span>Origional Array: {arrValues}</span>
-          <br></br>
-          <span>Bubble Sorted Array: {sortedArrValues}</span>
-        </div>
+      <div className="card-header">Bubble Sort</div>
+      <div className="card-body">
+        <button type="button" className="btn btn-success" onClick={newArray}>
+          Generate New Array
+        </button>
+        <br></br>
+        <br></br>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={sortThatArray}
+        >
+          Bubble Sort The Array
+        </button>
+        <br></br>
+        <span>Origional Array: {arrValues}</span>
+        <br></br>
+        <span>Bubble Sorted Array: {sortedArrValues}</span>
       </div>
     </div>
   );
