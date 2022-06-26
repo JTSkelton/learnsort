@@ -2,6 +2,32 @@ import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 
 function HeapSort(arr) {
+  for (var i = Math.floor(arr.length / 2) - 1; i >= 0; i--)
+    heapify(arr, arr.length, i);
+
+  for (var j = arr.length - 1; j > 0; j--) {
+    var temp = arr[0];
+    arr[0] = arr[j];
+    arr[j] = temp;
+    heapify(arr, j, 0);
+  }
+  return arr;
+}
+
+function heapify(arr, arrLength, i) {
+  var largest = i;
+  var left = 2 * i + 1;
+  var right = 2 * i + 2;
+
+  if (left < arrLength && arr[left] > arr[largest]) largest = left;
+
+  if (right < arrLength && arr[right] > arr[largest]) largest = right;
+
+  if (largest !== i) {
+    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+
+    heapify(arr, arrLength, largest);
+  }
   return arr;
 }
 

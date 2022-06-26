@@ -8,6 +8,7 @@ import QuickSortDisplay from "./QuickSort";
 import MergeSortDisplay from "./MergeSort";
 import InsertionSortDisplay from "./InsertionSort";
 import SelectionSortDisplay from "./SelectionSort";
+import HeapSortDisplay from "./HeapSort";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <MergeSortDisplay />
       <InsertionSortDisplay />
       <SelectionSortDisplay />
+      <HeapSortDisplay />
     </React.Fragment>
   );
 }
