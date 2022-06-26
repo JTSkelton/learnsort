@@ -6,6 +6,8 @@ import BubbleSortDisplay from "./BubbleSort";
 import RandomArr from "./RandomArr";
 import QuickSortDisplay from "./QuickSort";
 import MergeSortDisplay from "./MergeSort";
+import InsertionSortDisplay from "./InsertionSort";
+import SelectionSortDisplay from "./SelectionSort";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <BubbleSortDisplay />
       <QuickSortDisplay />
       <MergeSortDisplay />
+      <InsertionSortDisplay />
+      <SelectionSortDisplay />
     </React.Fragment>
   );
 }
