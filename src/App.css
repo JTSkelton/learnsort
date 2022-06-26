@@ -1,0 +1,25 @@
+.active-algo {
+  display: block;
+}
+
+.algo {
+  display: none;
+}
+
+.algoBody {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 5px;
+}
+
+.displayButton {
+  background-color: rgb(51, 51, 51);
+}
+
+.currentAlgo {
+  background-color: rgb(51, 51, 51);
+}
+
+.algoCode {
+  background-color: rgb(51, 51, 51);
+}
