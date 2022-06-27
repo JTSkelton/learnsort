@@ -14,9 +14,12 @@ html {
 
 .algoBody {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "buttons buttons"
+    "visualizer codeblock";
   gap: 5px;
   padding: 5px;
+  justify-content: center;
 }
 
 .displayButton {
@@ -40,7 +43,17 @@ html {
 }
 
 .algoCode {
-  min-height: 700px;
+  display: flex;
   justify-content: left;
+  min-height: 650px;
+  min-width: 650px;
+  max-height: 700px;
+  max-width: 650px;
+
   background-color: rgb(51, 51, 51);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
 }
