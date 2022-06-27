@@ -16,6 +16,7 @@ html {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 5px;
+  padding: 5px;
 }
 
 .displayButton {
