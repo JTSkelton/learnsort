@@ -1,6 +1,7 @@
 import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 import Canvas from "../Canvas";
+import Draw from "./DrawArray";
 
 function BubbleSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
@@ -13,23 +14,11 @@ function BubbleSort(arr) {
   return arr;
 }
 
-const draw = (context, array) => {
-  context.clearRect(0, 0, 400, 150);
-  for (var i = 0; i < array.length; i++) {
-    var grd = context.createLinearGradient(0, 400, 400, 0);
-    grd.addColorStop(0, "black");
-    grd.addColorStop(1, "white");
-    context.fillStyle = grd;
-    context.strokeStyle = "#000000";
-    context.fillRect(i * 10, 150 - 10 * array[i], 8, 10 * array[i]);
-  }
-};
-
 function BubbleSortDisplay() {
   const [arrValues, setArrValues] = useState(RandomArr());
   const [sortedArrValues, setSorted] = useState([]);
   const [canvas, setCanvas] = useState(
-    <Canvas array={[...arrValues]} draw={draw} height={200} width={400} />
+    <Canvas array={[...arrValues]} draw={Draw} height={200} width={400} />
   );
 
   function SortThatArray() {
@@ -42,19 +31,20 @@ function BubbleSortDisplay() {
   function NewArray() {
     const array = RandomArr();
     setArrValues(array);
+    setSorted(" ");
     setCanvas(
-      <Canvas array={[...array]} draw={draw} height={200} width={400} />
+      <Canvas array={[...array]} draw={Draw} height={200} width={400} />
     );
   }
 
   const drawSorted = (context) => {
     const arr = [...arrValues];
+    var grd = context.createLinearGradient(0, 400, 400, 0);
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const loop = async () => {
       for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - 1 - i; j++) {
-          var grd = context.createLinearGradient(0, 400, 400, 0);
-          if (arr[j] > arr[j + 1]) {
+          if (arr[j] >= arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
             context.clearRect((j + 1) * 10, 0, 8, 150);
 
@@ -73,9 +63,10 @@ function BubbleSortDisplay() {
             grd.addColorStop(1, "white");
             context.fillStyle = grd;
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
-            await wait(100);
-          } else if (arr[j] <= arr[j + 1]) {
-            context.clearRect(j * 10, 0, 8, 150);
+
+            await wait(20);
+          } else if (arr[j] < arr[j + 1] && arr[j] !== arr.length) {
+            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
             context.clearRect((j + 1) * 10, 0, 8, 150);
 
             context.fillStyle = "#00bc8c";
