@@ -65,7 +65,7 @@ function BubbleSortDisplay() {
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
 
             await wait(20);
-          } else if (arr[j] < arr[j + 1] && arr[j] !== arr.length) {
+          } else if (arr[j] < arr[j + 1]) {
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
             context.clearRect((j + 1) * 10, 0, 8, 150);
 
@@ -81,6 +81,11 @@ function BubbleSortDisplay() {
             grd.addColorStop(0, "black");
             grd.addColorStop(1, "white");
             context.fillStyle = grd;
+            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
+          }
+          if (arr.length - 1 - i === 1) {
+            context.clearRect(j * 10, 0, 8, 150);
+            context.fillStyle = "#00bc8c";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
         }
