@@ -102,15 +102,14 @@ function Body() {
           <pre>
             <code className="javascript-html">
               {`
-  function bubbleSort(arr) {
-    arr.map((e1) =>
-      arr.map((e2, i) => {
-        if (arr[i] > arr[i + 1]) {
-          arr[i] = arr[i + 1];
-          arr[i + 1] = e2;
+  function BubbleSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = 0; j < arr.length - 1 - i; j++) {
+        if (arr[j] > arr[j + 1]) {
+          [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
         }
-      })
-    );
+      }
+    }
     return arr;
   }
               `}

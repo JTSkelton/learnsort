@@ -24,7 +24,6 @@ function BubbleSortDisplay() {
   function SortThatArray() {
     const array = [...arrValues];
     setSorted(BubbleSort(array));
-    console.log(arrValues);
     setCanvas(<Canvas draw={drawSorted} height={200} width={400} />);
   }
 
@@ -44,6 +43,7 @@ function BubbleSortDisplay() {
     const loop = async () => {
       for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - 1 - i; j++) {
+          console.log(j);
           if (arr[j] >= arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
             context.clearRect((j + 1) * 10, 0, 8, 150);
@@ -58,17 +58,22 @@ function BubbleSortDisplay() {
               10 * arr[j + 1]
             );
 
+            context.fillStyle = "#f39c12";
+            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
+
             grd = context.createLinearGradient(0, 400, 400, 0);
             grd.addColorStop(0, "black");
             grd.addColorStop(1, "white");
             context.fillStyle = grd;
-            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
+            context.fillRect(
+              (j - 1) * 10,
+              150 - 10 * arr[j - 1],
+              8,
+              10 * arr[j - 1]
+            );
 
-            await wait(20);
+            await wait(200);
           } else if (arr[j] < arr[j + 1]) {
-            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
-            context.clearRect((j + 1) * 10, 0, 8, 150);
-
             context.fillStyle = "#00bc8c";
             context.fillRect(
               (j + 1) * 10,
@@ -77,6 +82,25 @@ function BubbleSortDisplay() {
               10 * arr[j + 1]
             );
 
+            grd = context.createLinearGradient(0, 400, 400, 0);
+            grd.addColorStop(0, "black");
+            grd.addColorStop(1, "white");
+            context.fillStyle = grd;
+            context.fillRect(
+              (j - 1) * 10,
+              150 - 10 * arr[j - 1],
+              8,
+              10 * arr[j - 1]
+            );
+
+            grd = context.createLinearGradient(0, 400, 400, 0);
+            grd.addColorStop(0, "black");
+            grd.addColorStop(1, "white");
+            context.fillStyle = grd;
+            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
+          }
+          if (j === arr.length - 2 - i) {
+            context.clearRect(j * 10, 0, 8, 150);
             grd = context.createLinearGradient(0, 400, 400, 0);
             grd.addColorStop(0, "black");
             grd.addColorStop(1, "white");
