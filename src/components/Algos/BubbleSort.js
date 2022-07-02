@@ -14,6 +14,15 @@ function BubbleSort(arr) {
   return arr;
 }
 
+let waitForPressResolve = true;
+function waitForPress() {
+  return new Promise((resolve) => (waitForPressResolve = resolve));
+}
+
+function btnResolver() {
+  if (waitForPressResolve) waitForPressResolve();
+}
+
 function BubbleSortDisplay() {
   const [arrValues, setArrValues] = useState(RandomArr());
   const [sortedArrValues, setSorted] = useState([]);
@@ -36,23 +45,12 @@ function BubbleSortDisplay() {
     );
   }
 
-  let waitForPressResolve;
-  const btn = document.getElementById("next");
-  function waitForPress() {
-    return new Promise((resolve) => (waitForPressResolve = resolve));
-  }
-
-  function btnResolver() {
-    if (waitForPressResolve) waitForPressResolve();
-  }
-
   const drawSorted = async (context) => {
     const arr = [...arrValues];
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const loop = async () => {
       for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - 1 - i; j++) {
-          btn.addEventListener("click", btnResolver);
           console.log(j);
           if (arr[j] >= arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
@@ -110,9 +108,9 @@ function BubbleSortDisplay() {
             context.fillStyle = "#00bc8c";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
+
           await waitForPress();
         }
-        btn.removeEventListener("click", btnResolver);
       }
     };
     loop();
@@ -139,7 +137,12 @@ function BubbleSortDisplay() {
         <br></br>
         <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
-        <button id="next" type="button" className="btn btn-success">
+        <button
+          id="next"
+          type="button"
+          className="btn btn-success"
+          onClick={btnResolver}
+        >
           Next
         </button>
       </div>
