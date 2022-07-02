@@ -36,13 +36,23 @@ function BubbleSortDisplay() {
     );
   }
 
-  const drawSorted = (context) => {
+  let waitForPressResolve;
+  const btn = document.getElementById("next");
+  function waitForPress() {
+    return new Promise((resolve) => (waitForPressResolve = resolve));
+  }
+
+  function btnResolver() {
+    if (waitForPressResolve) waitForPressResolve();
+  }
+
+  const drawSorted = async (context) => {
     const arr = [...arrValues];
-    var grd = context.createLinearGradient(0, 400, 400, 0);
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const loop = async () => {
       for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - 1 - i; j++) {
+          btn.addEventListener("click", btnResolver);
           console.log(j);
           if (arr[j] >= arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
@@ -61,10 +71,7 @@ function BubbleSortDisplay() {
             context.fillStyle = "#f39c12";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
 
-            grd = context.createLinearGradient(0, 400, 400, 0);
-            grd.addColorStop(0, "black");
-            grd.addColorStop(1, "white");
-            context.fillStyle = grd;
+            context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 10,
               150 - 10 * arr[j - 1],
@@ -72,7 +79,7 @@ function BubbleSortDisplay() {
               10 * arr[j - 1]
             );
 
-            await wait(200);
+            await wait(25);
           } else if (arr[j] < arr[j + 1]) {
             context.fillStyle = "#00bc8c";
             context.fillRect(
@@ -82,10 +89,7 @@ function BubbleSortDisplay() {
               10 * arr[j + 1]
             );
 
-            grd = context.createLinearGradient(0, 400, 400, 0);
-            grd.addColorStop(0, "black");
-            grd.addColorStop(1, "white");
-            context.fillStyle = grd;
+            context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 10,
               150 - 10 * arr[j - 1],
@@ -93,18 +97,12 @@ function BubbleSortDisplay() {
               10 * arr[j - 1]
             );
 
-            grd = context.createLinearGradient(0, 400, 400, 0);
-            grd.addColorStop(0, "black");
-            grd.addColorStop(1, "white");
-            context.fillStyle = grd;
+            context.fillStyle = "#f39c12";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
           if (j === arr.length - 2 - i) {
             context.clearRect(j * 10, 0, 8, 150);
-            grd = context.createLinearGradient(0, 400, 400, 0);
-            grd.addColorStop(0, "black");
-            grd.addColorStop(1, "white");
-            context.fillStyle = grd;
+            context.fillStyle = "#adb5bd";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
           if (arr.length - 1 - i === 1) {
@@ -112,7 +110,9 @@ function BubbleSortDisplay() {
             context.fillStyle = "#00bc8c";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
+          await waitForPress();
         }
+        btn.removeEventListener("click", btnResolver);
       }
     };
     loop();
@@ -139,6 +139,9 @@ function BubbleSortDisplay() {
         <br></br>
         <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
+        <button id="next" type="button" className="btn btn-success">
+          Next
+        </button>
       </div>
     </div>
   );
