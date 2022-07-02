@@ -52,11 +52,33 @@ function BubbleSortDisplay() {
       for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - 1 - i; j++) {
           console.log(j);
-          if (arr[j] >= arr[j + 1]) {
+          if (arr[j] > arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
             context.clearRect((j + 1) * 10, 0, 8, 150);
 
+            context.fillStyle = "#e74c3c";
+            context.fillRect(
+              (j + 1) * 10,
+              150 - 10 * arr[j + 1],
+              8,
+              10 * arr[j + 1]
+            );
+
+            context.fillStyle = "#e74c3c";
+            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
+
+            context.fillStyle = "#adb5bd";
+            context.fillRect(
+              (j - 1) * 10,
+              150 - 10 * arr[j - 1],
+              8,
+              10 * arr[j - 1]
+            );
+            // await waitForPress();
+            await wait(400);
+
             [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            context.clearRect(j * 10, 0, 8, 150);
 
             context.fillStyle = "#00bc8c";
             context.fillRect(
@@ -78,7 +100,7 @@ function BubbleSortDisplay() {
             );
 
             await wait(25);
-          } else if (arr[j] < arr[j + 1]) {
+          } else if (arr[j] <= arr[j + 1]) {
             context.fillStyle = "#00bc8c";
             context.fillRect(
               (j + 1) * 10,
