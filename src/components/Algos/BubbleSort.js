@@ -24,11 +24,18 @@ function btnResolver() {
 }
 
 function BubbleSortDisplay() {
+  const [show, setShow] = useState(() => {
+    return 1;
+  });
   const [arrValues, setArrValues] = useState(RandomArr());
   const [sortedArrValues, setSorted] = useState([]);
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={Draw} height={200} width={400} />
   );
+
+  const ToggleSwitch = (index) => {
+    setShow(index);
+  };
 
   function SortThatArray() {
     const array = [...arrValues];
@@ -41,7 +48,7 @@ function BubbleSortDisplay() {
     setArrValues(array);
     setSorted(" ");
     setCanvas(
-      <Canvas array={[...array]} draw={Draw} height={200} width={400} />
+      <Canvas array={[...array]} draw={Draw} height={200} width={100} />
     );
   }
 
@@ -55,7 +62,7 @@ function BubbleSortDisplay() {
           if (arr[j] > arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
             context.clearRect((j + 1) * 10, 0, 8, 150);
-
+            context.beginPath();
             context.fillStyle = "#e74c3c";
             context.fillRect(
               (j + 1) * 10,
@@ -63,10 +70,13 @@ function BubbleSortDisplay() {
               8,
               10 * arr[j + 1]
             );
-
+            context.clearRect(j * 10, 0, 8, 150);
+            context.beginPath();
             context.fillStyle = "#e74c3c";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
 
+            context.clearRect((j - 1) * 10, 0, 8, 150);
+            context.beginPath();
             context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 10,
@@ -74,33 +84,43 @@ function BubbleSortDisplay() {
               8,
               10 * arr[j - 1]
             );
-            // await waitForPress();
+
             await wait(400);
 
             [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-            context.clearRect(j * 10, 0, 8, 150);
 
-            context.fillStyle = "#00bc8c";
-            context.fillRect(
-              (j + 1) * 10,
-              150 - 10 * arr[j + 1],
-              8,
-              10 * arr[j + 1]
-            );
+            let x = (j + 1) * 10;
+            let xx = j * 10;
+            let dx = 0.25;
+            function animate() {
+              requestAnimationFrame(animate);
+              context.fillStyle = "#adb5bd";
+              context.fillRect(
+                (j - 1) * 10,
+                150 - 10 * arr[j - 1],
+                8,
+                10 * arr[j - 1]
+              );
+              context.clearRect((j + 1) * 10, 0, 8, 150);
+              context.clearRect(j * 10, 0, 10, 150);
+              context.beginPath();
+              context.fillStyle = "#f39c12";
+              context.fillRect(x, 150 - 10 * arr[j], 8, 10 * arr[j]);
+              context.beginPath();
+              context.fillStyle = "#00bc8c";
+              context.fillRect(xx, 150 - 10 * arr[j + 1], 8, 10 * arr[j + 1]);
 
-            context.fillStyle = "#f39c12";
-            context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
+              if (x + 10 === (j + 1) * 10) {
+                return;
+              }
+              x -= dx;
+              xx += dx;
+            }
 
-            context.fillStyle = "#adb5bd";
-            context.fillRect(
-              (j - 1) * 10,
-              150 - 10 * arr[j - 1],
-              8,
-              10 * arr[j - 1]
-            );
-
-            await wait(25);
+            animate();
           } else if (arr[j] <= arr[j + 1]) {
+            context.clearRect((j + 1) * 10, 0, 8, 150);
+            context.beginPath();
             context.fillStyle = "#00bc8c";
             context.fillRect(
               (j + 1) * 10,
@@ -108,7 +128,8 @@ function BubbleSortDisplay() {
               8,
               10 * arr[j + 1]
             );
-
+            context.clearRect((j - 1) * 10, 0, 8, 150);
+            context.beginPath();
             context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 10,
@@ -116,7 +137,8 @@ function BubbleSortDisplay() {
               8,
               10 * arr[j - 1]
             );
-
+            context.clearRect(j * 10, 0, 8, 150);
+            context.beginPath();
             context.fillStyle = "#f39c12";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
