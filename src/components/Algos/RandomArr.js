@@ -1,5 +1,3 @@
-import React from "react";
-
 function RandomArr() {
   const arrayLength = 40;
   const min = 1;
