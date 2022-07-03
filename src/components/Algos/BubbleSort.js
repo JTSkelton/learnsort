@@ -85,7 +85,7 @@ function BubbleSortDisplay() {
               10 * arr[j - 1]
             );
 
-            await wait(400);
+            await wait(800);
 
             [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
 
@@ -93,7 +93,6 @@ function BubbleSortDisplay() {
             let xx = j * 10;
             let dx = 0.25;
             function animate() {
-              requestAnimationFrame(animate);
               context.fillStyle = "#adb5bd";
               context.fillRect(
                 (j - 1) * 10,
@@ -101,11 +100,12 @@ function BubbleSortDisplay() {
                 8,
                 10 * arr[j - 1]
               );
-              context.clearRect((j + 1) * 10, 0, 8, 150);
+
               context.clearRect(j * 10, 0, 10, 150);
               context.beginPath();
               context.fillStyle = "#f39c12";
               context.fillRect(x, 150 - 10 * arr[j], 8, 10 * arr[j]);
+              context.clearRect((j + 1) * 10, 0, 8, 150);
               context.beginPath();
               context.fillStyle = "#00bc8c";
               context.fillRect(xx, 150 - 10 * arr[j + 1], 8, 10 * arr[j + 1]);
@@ -115,6 +115,7 @@ function BubbleSortDisplay() {
               }
               x -= dx;
               xx += dx;
+              requestAnimationFrame(animate);
             }
 
             animate();
