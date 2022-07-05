@@ -1,4 +1,4 @@
-import RandomArr from "./RandomArr";
+import RandomArr from "./FunctionsForAll/RandomArr";
 import React, { useState } from "react";
 
 function InsertionSort(arr) {
@@ -27,7 +27,7 @@ function InsertionSortDisplay() {
   }
 
   function newArray() {
-    setArrValues(RandomArr());
+    setArrValues(RandomArr(10));
   }
 
   return (

@@ -1,4 +1,4 @@
-import RandomArr from "./RandomArr";
+import RandomArr from "./FunctionsForAll/RandomArr";
 import React, { useState } from "react";
 
 function HeapSort(arr) {

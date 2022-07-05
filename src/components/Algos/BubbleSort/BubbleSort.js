@@ -1,8 +1,7 @@
-import RandomArr from "./RandomArr";
+import RandomArr from "../FunctionsForAll/RandomArr";
 import React, { useState } from "react";
-import Canvas from "../Canvas";
-import Draw from "./DrawArray";
-import ToggleSwitch from "../Body";
+import Canvas from "../FunctionsForAll/Canvas";
+import Draw from "../FunctionsForAll/DrawArray";
 
 export function BubbleSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
@@ -25,9 +24,6 @@ function btnResolver() {
 }
 
 function BubbleSortDisplay() {
-  const [show, setShow] = useState(() => {
-    return 1;
-  });
   const [arrValues, setArrValues] = useState(RandomArr(10));
   const [sortedArrValues, setSorted] = useState([]);
   const [canvas, setCanvas] = useState(
@@ -57,9 +53,7 @@ function BubbleSortDisplay() {
         for (let j = 0; j < arr.length - 1 - i; j++) {
           console.log(j);
           if (arr[j] > arr[j + 1]) {
-            context.clearRect(j * 60, 0, 58, 300);
             context.clearRect((j + 1) * 60, 0, 58, 300);
-
             context.fillStyle = "#e74c3c";
             context.fillRect(
               (j + 1) * 60,
@@ -67,13 +61,12 @@ function BubbleSortDisplay() {
               58,
               30 * arr[j + 1]
             );
-            context.clearRect(j * 60, 0, 58, 300);
 
+            context.clearRect(j * 60, 0, 58, 300);
             context.fillStyle = "#e74c3c";
             context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
 
             context.clearRect((j - 1) * 60, 0, 58, 300);
-
             context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 60,
@@ -82,14 +75,14 @@ function BubbleSortDisplay() {
               30 * arr[j - 1]
             );
 
-            await wait(200);
+            await wait(300);
 
             [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
 
             let x = (j + 1) * 60;
             let xx = j * 60;
             let dx = 1;
-            function animate() {
+            function animateBubble() {
               context.clearRect((j - 1) * 60, 0, 60, 300);
               context.fillStyle = "#adb5bd";
               context.fillRect(
@@ -98,12 +91,12 @@ function BubbleSortDisplay() {
                 58,
                 30 * arr[j - 1]
               );
-              context.clearRect(j * 60, 0, 60, 300);
 
+              context.clearRect(j * 60, 0, 60, 300);
               context.fillStyle = "#f39c12";
               context.fillRect(x, 300 - 30 * arr[j], 58, 30 * arr[j]);
-              context.clearRect((j + 1) * 60, 0, 58, 300);
 
+              context.clearRect((j + 1) * 60, 0, 58, 300);
               context.fillStyle = "#00bc8c";
               context.fillRect(xx, 300 - 30 * arr[j + 1], 58, 30 * arr[j + 1]);
 
@@ -112,13 +105,12 @@ function BubbleSortDisplay() {
               }
               x -= dx;
               xx += dx;
-              requestAnimationFrame(animate);
+              requestAnimationFrame(animateBubble);
             }
 
-            animate();
+            animateBubble();
           } else if (arr[j] <= arr[j + 1]) {
             context.clearRect((j + 1) * 60, 0, 58, 300);
-
             context.fillStyle = "#00bc8c";
             context.fillRect(
               (j + 1) * 60,
@@ -126,8 +118,8 @@ function BubbleSortDisplay() {
               58,
               30 * arr[j + 1]
             );
-            context.clearRect((j - 1) * 60, 0, 58, 300);
 
+            context.clearRect((j - 1) * 60, 0, 58, 300);
             context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 60,
@@ -135,8 +127,8 @@ function BubbleSortDisplay() {
               58,
               30 * arr[j - 1]
             );
-            context.clearRect(j * 60, 0, 58, 300);
 
+            context.clearRect(j * 60, 0, 58, 300);
             context.fillStyle = "#f39c12";
             context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
           }
@@ -150,6 +142,7 @@ function BubbleSortDisplay() {
             context.fillStyle = "#00bc8c";
             context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
           }
+          await wait(300);
           await waitForPress();
         }
       }
@@ -159,32 +152,20 @@ function BubbleSortDisplay() {
 
   return (
     <div className="bubbleSort">
-      <div className="card-header">
-        Bubble Sort
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={() => ToggleSwitch(7)}
-        >
-          Bubble Sort
-        </button>
-      </div>
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
           New Array
         </button>
-        <br></br>
+
         <span>Unsorted Array: {arrValues}</span>
-        <br></br>
-        <br></br>
+
         <button
           type="button"
           className="btn btn-success"
           onClick={SortThatArray}
         >
-          Sort
+          Begin Sort
         </button>
-        <br></br>
         <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
         <button

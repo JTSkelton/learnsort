@@ -5,7 +5,7 @@ html {
 }
 
 .active-algo {
-  display: block;
+  display: hide;
 }
 
 .algo {
@@ -13,28 +13,30 @@ html {
 }
 
 .active-algo-fast {
-  display: block;
-}
-
-.algo-fast {
-  display: none;
+  display: hide;
 }
 
 .algoBody {
   display: grid;
   grid-template-areas:
     "buttons buttons"
+    "header header"
     "algos code";
   gap: 5px;
   padding: 5px;
   grid-template-columns: 1fr 1fr;
 }
 
-.currentAlgoFast {
+.bubbleSortFast {
+  grid-area: algos code;
   background-color: rgb(51, 51, 51);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 5px;
+}
+.currentAlgoHeader {
+  grid-area: header;
+  background-color: #444;
+  font-size: 40px;
+  justify-content: center;
+  text-align: center;
 }
 
 .displayButton {
@@ -52,7 +54,7 @@ html {
   padding: 5px;
 }
 
-.currentAlgo {
+.bubbleSort {
   grid-area: algos;
   background-color: rgb(51, 51, 51);
 }
@@ -64,27 +66,13 @@ html {
   background-color: rgb(51, 51, 51);
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-}
-
-.card-header {
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-}
-
 .card-body {
   display: grid;
-
   gap: 10px;
-  max-width: 1fr;
   justify-content: center;
   justify-items: center;
-  position: relative;
 }
 
 Canvas {
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(0, 0, 0);
 }

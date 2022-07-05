@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import BubbleSortDisplay from "./Algos/BubbleSort";
+import BubbleSortDisplay from "./Algos/BubbleSort/BubbleSort";
 import QuickSortDisplay from "./Algos/QuickSort";
 import "../App.css";
 import MergeSortDisplay from "./Algos/MergeSort";
 import InsertionSortDisplay from "./Algos/InsertionSort";
 import SelectionSortDisplay from "./Algos/SelectionSort";
 import HeapSortDisplay from "./Algos/HeapSort";
+import BubbleSortDisplayFast from "./Algos/BubbleSort/FastBubbleSort";
 
 function Body() {
   const [show, setShow] = useState(() => {
@@ -63,6 +64,37 @@ function Body() {
         </button>
       </div>
 
+      <div className="currentAlgoHeader">
+        <div className={show === 1 || 7 ? "active-algo" : "algo"}>
+          Bubble Sort
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => ToggleSwitch(7)}
+          >
+            Bubble Sort
+          </button>
+        </div>
+
+        <div className={show === 2 ? "active-algo" : "algo"}>Quick Sort</div>
+        <div className={show === 3 ? "active-algo" : "algo"}>Merge Sort</div>
+
+        <div className={show === 4 ? "active-algo" : "algo"}>
+          Insertion Sort
+        </div>
+        <div className={show === 5 ? "active-algo" : "algo"}>
+          Selection Sort
+        </div>
+
+        <div className={show === 6 ? "active-algo" : "algo"}>Heap Sort</div>
+      </div>
+
+      <div className={show === 7 ? "active-algo-fast" : "algo"}>
+        <React.Fragment>
+          <BubbleSortDisplayFast />
+        </React.Fragment>
+      </div>
+
       <div className="currentAlgo">
         <div className={show === 1 ? "active-algo" : "algo"}>
           <React.Fragment>
@@ -98,11 +130,11 @@ function Body() {
           </React.Fragment>
         </div>
       </div>
-      <div className="algoCode">
-        <div className={show === 1 ? "active-algo" : "algo"}>
-          <pre>
-            <code className="javascript-html">
-              {`
+
+      <div className={show === 1 ? "active-algo" : "algo"}>
+        <pre>
+          <code className="javascript-html">
+            {`
   function BubbleSort(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
       for (let j = 0; j < arr.length - 1 - i; j++) {
@@ -114,13 +146,13 @@ function Body() {
     return arr;
   }
               `}
-            </code>
-          </pre>
-        </div>
-        <div className={show === 2 ? "active-algo" : "algo"}>
-          <pre>
-            <code className="javascript-html">
-              {`
+          </code>
+        </pre>
+      </div>
+      <div className={show === 2 ? "active-algo" : "algo"}>
+        <pre>
+          <code className="javascript-html">
+            {`
   function quickSort(origArray) {
     if (origArray.length <= 1) return origArray;
   
@@ -139,13 +171,13 @@ function Body() {
     return newArray;
   }
               `}
-            </code>
-          </pre>
-        </div>
-        <div className={show === 3 ? "active-algo" : "algo"}>
-          <pre>
-            <code className="javascript-html">
-              {`
+          </code>
+        </pre>
+      </div>
+      <div className={show === 3 ? "active-algo" : "algo"}>
+        <pre>
+          <code className="javascript-html">
+            {`
   const mergeSort = (array) => {
     if (array.length <= 1) {
       return array;
@@ -175,13 +207,13 @@ function Body() {
       }
     }
               `}
-            </code>
-          </pre>
-        </div>
-        <div className={show === 4 ? "active-algo" : "algo"}>
-          <pre>
-            <code className="javascript-html">
-              {`
+          </code>
+        </pre>
+      </div>
+      <div className={show === 4 ? "active-algo" : "algo"}>
+        <pre>
+          <code className="javascript-html">
+            {`
   function InsertionSort(arr) {
     for (let i = 1; i < arr.length; i++) {
       for (let j = i; j > 0; j--) {
@@ -195,13 +227,13 @@ function Body() {
     return arr;
   }
               `}
-            </code>
-          </pre>
-        </div>
-        <div className={show === 5 ? "active-algo" : "algo"}>
-          <pre>
-            <code className="javascript-html">
-              {`
+          </code>
+        </pre>
+      </div>
+      <div className={show === 5 ? "active-algo" : "algo"}>
+        <pre>
+          <code className="javascript-html">
+            {`
   function SelectionSort(array) {
     const arr = array.map((x) => {
       return x;
@@ -218,13 +250,13 @@ function Body() {
     return arr;
   }
               `}
-            </code>
-          </pre>
-        </div>
-        <div className={show === 6 ? "active-algo" : "algo"}>
-          <pre>
-            <code className="javascript-html">
-              {`
+          </code>
+        </pre>
+      </div>
+      <div className={show === 6 ? "active-algo" : "algo"}>
+        <pre>
+          <code className="javascript-html">
+            {`
   function HeapSort(arr) {
     for (var i = Math.floor(arr.length / 2) - 1; i >= 0; i--)
       heapify(arr, arr.length, i);
@@ -255,9 +287,8 @@ function Body() {
     return arr;
   }
               `}
-            </code>
-          </pre>
-        </div>
+          </code>
+        </pre>
       </div>
     </div>
   );

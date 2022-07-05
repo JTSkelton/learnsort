@@ -1,28 +1,38 @@
-import { BubbleSort } from "./BubbleSort";
-import Canvas from "../Canvas";
+import Canvas from "../FunctionsForAll/Canvas";
 import React, { useState } from "react";
-import RandomArr from "./RandomArr";
-import Draw from "./DrawArray";
+import RandomArr from "../FunctionsForAll/RandomArr";
+import Draw from "../FunctionsForAll/DrawArray";
+
+function BubbleSort(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = 0; j < arr.length - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+  return arr;
+}
 
 function BubbleSortDisplayFast() {
-  const [arrValues, setArrValues] = useState(RandomArr());
+  const [arrValues, setArrValues] = useState(RandomArr(60));
   const [sortedArrValues, setSorted] = useState([]);
   const [canvas, setCanvas] = useState(
-    <Canvas array={[...arrValues]} draw={Draw} height={200} width={400} />
+    <Canvas array={[...arrValues]} draw={Draw} height={600} width={1000} />
   );
 
   function SortThatArray() {
     const array = [...arrValues];
     setSorted(BubbleSort(array));
-    setCanvas(<Canvas draw={drawSorted} height={200} width={400} />);
+    setCanvas(<Canvas draw={drawSorted} height={600} width={1000} />);
   }
 
   function NewArray() {
-    const array = RandomArr();
+    const array = RandomArr(60);
     setArrValues(array);
     setSorted(" ");
     setCanvas(
-      <Canvas array={[...array]} draw={Draw} height={200} width={400} />
+      <Canvas array={[...array]} draw={Draw} height={600} width={1000} />
     );
   }
 
@@ -135,24 +145,22 @@ function BubbleSortDisplayFast() {
   };
 
   return (
-    <div className="bubbleSort">
-      <div className="card-header">Bubble Sort</div>
+    <div className="bubbleSortFast">
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
-          Generate New Array
+          New Array
         </button>
-        <br></br>
+
         <span>Unsorted Array: {arrValues}</span>
-        <br></br>
-        <br></br>
+
         <button
           type="button"
           className="btn btn-success"
           onClick={SortThatArray}
         >
-          Bubble Sort The Array
+          Begin Sort
         </button>
-        <br></br>
+
         <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
       </div>
