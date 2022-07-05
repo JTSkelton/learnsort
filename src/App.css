@@ -12,43 +12,55 @@ html {
   display: none;
 }
 
+.active-algo-fast {
+  display: block;
+}
+
+.algo-fast {
+  display: none;
+}
+
 .algoBody {
   display: grid;
   grid-template-areas:
     "buttons buttons"
-    "visualizer codeblock";
+    "algos code";
   gap: 5px;
   padding: 5px;
-  justify-content: center;
+  grid-template-columns: 1fr 1fr;
+}
+
+.currentAlgoFast {
+  background-color: rgb(51, 51, 51);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
 }
 
 .displayButton {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 5px;
+  grid-area: buttons;
+  max-width: auto;
   max-height: 50px;
-  max-width: 1000px;
-  background-color: rgb(51, 51, 51);
+  display: flex;
   justify-content: center;
+  gap: 5px;
 }
 
-.displayButton:nth-of-type(1) {
-  grid-column-start: 1;
-  grid-column-end: 3;
+.btn-success {
+  width: 150px;
+  gap: 5px;
+  padding: 5px;
 }
 
 .currentAlgo {
+  grid-area: algos;
   background-color: rgb(51, 51, 51);
 }
 
 .algoCode {
+  grid-area: code;
   display: flex;
   justify-content: left;
-  min-height: 650px;
-  min-width: 650px;
-  max-height: 700px;
-  max-width: 650px;
-
   background-color: rgb(51, 51, 51);
 }
 
@@ -58,22 +70,18 @@ html {
 }
 
 .card-header {
+  font-size: 25px;
   display: flex;
   justify-content: center;
 }
 
 .card-body {
   display: grid;
-  grid-template-areas:
-    "button"
-    "numbers"
-    "button"
-    "numbers"
-    "visualizer";
+
   gap: 10px;
-  grid-template-columns: 2fr;
-  max-width: auto;
+  max-width: 1fr;
   justify-content: center;
+  justify-items: center;
   position: relative;
 }
 

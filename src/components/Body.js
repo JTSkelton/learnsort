@@ -62,6 +62,7 @@ function Body() {
           Heap Sort
         </button>
       </div>
+
       <div className="currentAlgo">
         <div className={show === 1 ? "active-algo" : "algo"}>
           <React.Fragment>

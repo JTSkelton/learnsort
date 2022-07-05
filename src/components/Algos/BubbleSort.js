@@ -2,8 +2,9 @@ import RandomArr from "./RandomArr";
 import React, { useState } from "react";
 import Canvas from "../Canvas";
 import Draw from "./DrawArray";
+import ToggleSwitch from "../Body";
 
-function BubbleSort(arr) {
+export function BubbleSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr.length - 1 - i; j++) {
       if (arr[j] > arr[j + 1]) {
@@ -33,10 +34,6 @@ function BubbleSortDisplay() {
     <Canvas array={[...arrValues]} draw={Draw} height={200} width={400} />
   );
 
-  const ToggleSwitch = (index) => {
-    setShow(index);
-  };
-
   function SortThatArray() {
     const array = [...arrValues];
     setSorted(BubbleSort(array));
@@ -48,7 +45,7 @@ function BubbleSortDisplay() {
     setArrValues(array);
     setSorted(" ");
     setCanvas(
-      <Canvas array={[...array]} draw={Draw} height={200} width={100} />
+      <Canvas array={[...array]} draw={Draw} height={200} width={400} />
     );
   }
 
@@ -62,7 +59,7 @@ function BubbleSortDisplay() {
           if (arr[j] > arr[j + 1]) {
             context.clearRect(j * 10, 0, 8, 150);
             context.clearRect((j + 1) * 10, 0, 8, 150);
-            context.beginPath();
+
             context.fillStyle = "#e74c3c";
             context.fillRect(
               (j + 1) * 10,
@@ -71,12 +68,12 @@ function BubbleSortDisplay() {
               10 * arr[j + 1]
             );
             context.clearRect(j * 10, 0, 8, 150);
-            context.beginPath();
+
             context.fillStyle = "#e74c3c";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
 
             context.clearRect((j - 1) * 10, 0, 8, 150);
-            context.beginPath();
+
             context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 10,
@@ -85,14 +82,15 @@ function BubbleSortDisplay() {
               10 * arr[j - 1]
             );
 
-            await wait(800);
+            await wait(200);
 
             [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
 
             let x = (j + 1) * 10;
             let xx = j * 10;
-            let dx = 0.25;
+            let dx = 1;
             function animate() {
+              context.clearRect((j - 1) * 10, 0, 10, 150);
               context.fillStyle = "#adb5bd";
               context.fillRect(
                 (j - 1) * 10,
@@ -100,13 +98,12 @@ function BubbleSortDisplay() {
                 8,
                 10 * arr[j - 1]
               );
-
               context.clearRect(j * 10, 0, 10, 150);
-              context.beginPath();
+
               context.fillStyle = "#f39c12";
               context.fillRect(x, 150 - 10 * arr[j], 8, 10 * arr[j]);
               context.clearRect((j + 1) * 10, 0, 8, 150);
-              context.beginPath();
+
               context.fillStyle = "#00bc8c";
               context.fillRect(xx, 150 - 10 * arr[j + 1], 8, 10 * arr[j + 1]);
 
@@ -121,7 +118,7 @@ function BubbleSortDisplay() {
             animate();
           } else if (arr[j] <= arr[j + 1]) {
             context.clearRect((j + 1) * 10, 0, 8, 150);
-            context.beginPath();
+
             context.fillStyle = "#00bc8c";
             context.fillRect(
               (j + 1) * 10,
@@ -130,7 +127,7 @@ function BubbleSortDisplay() {
               10 * arr[j + 1]
             );
             context.clearRect((j - 1) * 10, 0, 8, 150);
-            context.beginPath();
+
             context.fillStyle = "#adb5bd";
             context.fillRect(
               (j - 1) * 10,
@@ -139,7 +136,7 @@ function BubbleSortDisplay() {
               10 * arr[j - 1]
             );
             context.clearRect(j * 10, 0, 8, 150);
-            context.beginPath();
+
             context.fillStyle = "#f39c12";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
@@ -153,7 +150,6 @@ function BubbleSortDisplay() {
             context.fillStyle = "#00bc8c";
             context.fillRect(j * 10, 150 - 10 * arr[j], 8, 10 * arr[j]);
           }
-
           await waitForPress();
         }
       }
@@ -163,10 +159,19 @@ function BubbleSortDisplay() {
 
   return (
     <div className="bubbleSort">
-      <div className="card-header">Bubble Sort</div>
+      <div className="card-header">
+        Bubble Sort
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => ToggleSwitch(7)}
+        >
+          Bubble Sort
+        </button>
+      </div>
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
-          Generate New Array
+          New Array
         </button>
         <br></br>
         <span>Unsorted Array: {arrValues}</span>
@@ -177,7 +182,7 @@ function BubbleSortDisplay() {
           className="btn btn-success"
           onClick={SortThatArray}
         >
-          Bubble Sort The Array
+          Sort
         </button>
         <br></br>
         <span>Sorted Array: {sortedArrValues}</span>
