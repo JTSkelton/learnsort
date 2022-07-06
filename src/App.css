@@ -5,7 +5,7 @@ html {
 }
 
 .active-algo {
-  display: hide;
+  display: block;
 }
 
 .algo {
@@ -13,7 +13,8 @@ html {
 }
 
 .active-algo-fast {
-  display: hide;
+  grid-area: algos;
+  display: block;
 }
 
 .algoBody {
@@ -21,14 +22,15 @@ html {
   grid-template-areas:
     "buttons buttons"
     "header header"
-    "algos code";
+    "algos algos";
   gap: 5px;
   padding: 5px;
   grid-template-columns: 1fr 1fr;
 }
 
 .bubbleSortFast {
-  grid-area: algos code;
+  display: grid;
+
   background-color: rgb(51, 51, 51);
 }
 .currentAlgoHeader {
@@ -37,6 +39,10 @@ html {
   font-size: 40px;
   justify-content: center;
   text-align: center;
+}
+
+.activeAlgoCode {
+  background-color: rgb(51, 51, 51);
 }
 
 .displayButton {
@@ -74,5 +80,5 @@ html {
 }
 
 Canvas {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(51, 51, 51);
 }

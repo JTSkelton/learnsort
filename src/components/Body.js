@@ -95,46 +95,45 @@ function Body() {
         </React.Fragment>
       </div>
 
-      <div className="currentAlgo">
-        <div className={show === 1 ? "active-algo" : "algo"}>
-          <React.Fragment>
-            <BubbleSortDisplay />
-          </React.Fragment>
-        </div>
-
-        <div className={show === 2 ? "active-algo" : "algo"}>
-          <React.Fragment>
-            <QuickSortDisplay />
-          </React.Fragment>
-        </div>
-        <div className={show === 3 ? "active-algo" : "algo"}>
-          <React.Fragment>
-            <MergeSortDisplay />
-          </React.Fragment>
-        </div>
-
-        <div className={show === 4 ? "active-algo" : "algo"}>
-          <React.Fragment>
-            <InsertionSortDisplay />
-          </React.Fragment>
-        </div>
-        <div className={show === 5 ? "active-algo" : "algo"}>
-          <React.Fragment>
-            <SelectionSortDisplay />
-          </React.Fragment>
-        </div>
-
-        <div className={show === 6 ? "active-algo" : "algo"}>
-          <React.Fragment>
-            <HeapSortDisplay />
-          </React.Fragment>
-        </div>
+      <div className={show === 1 ? "active-algo" : "algo"}>
+        <React.Fragment>
+          <BubbleSortDisplay />
+        </React.Fragment>
       </div>
 
-      <div className={show === 1 ? "active-algo" : "algo"}>
-        <pre>
-          <code className="javascript-html">
-            {`
+      <div className={show === 2 ? "active-algo" : "algo"}>
+        <React.Fragment>
+          <QuickSortDisplay />
+        </React.Fragment>
+      </div>
+      <div className={show === 3 ? "active-algo" : "algo"}>
+        <React.Fragment>
+          <MergeSortDisplay />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 4 ? "active-algo" : "algo"}>
+        <React.Fragment>
+          <InsertionSortDisplay />
+        </React.Fragment>
+      </div>
+      <div className={show === 5 ? "active-algo" : "algo"}>
+        <React.Fragment>
+          <SelectionSortDisplay />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 6 ? "active-algo" : "algo"}>
+        <React.Fragment>
+          <HeapSortDisplay />
+        </React.Fragment>
+      </div>
+
+      <div className="activeAlgoCode">
+        <div className={show === 1 ? "active-algo" : "algo"}>
+          <pre>
+            <code className="javascript-html">
+              {`
   function BubbleSort(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
       for (let j = 0; j < arr.length - 1 - i; j++) {
@@ -146,13 +145,13 @@ function Body() {
     return arr;
   }
               `}
-          </code>
-        </pre>
-      </div>
-      <div className={show === 2 ? "active-algo" : "algo"}>
-        <pre>
-          <code className="javascript-html">
-            {`
+            </code>
+          </pre>
+        </div>
+        <div className={show === 2 ? "active-algo" : "algo"}>
+          <pre>
+            <code className="javascript-html">
+              {`
   function quickSort(origArray) {
     if (origArray.length <= 1) return origArray;
   
@@ -171,13 +170,13 @@ function Body() {
     return newArray;
   }
               `}
-          </code>
-        </pre>
-      </div>
-      <div className={show === 3 ? "active-algo" : "algo"}>
-        <pre>
-          <code className="javascript-html">
-            {`
+            </code>
+          </pre>
+        </div>
+        <div className={show === 3 ? "active-algo" : "algo"}>
+          <pre>
+            <code className="javascript-html">
+              {`
   const mergeSort = (array) => {
     if (array.length <= 1) {
       return array;
@@ -207,13 +206,13 @@ function Body() {
       }
     }
               `}
-          </code>
-        </pre>
-      </div>
-      <div className={show === 4 ? "active-algo" : "algo"}>
-        <pre>
-          <code className="javascript-html">
-            {`
+            </code>
+          </pre>
+        </div>
+        <div className={show === 4 ? "active-algo" : "algo"}>
+          <pre>
+            <code className="javascript-html">
+              {`
   function InsertionSort(arr) {
     for (let i = 1; i < arr.length; i++) {
       for (let j = i; j > 0; j--) {
@@ -227,13 +226,13 @@ function Body() {
     return arr;
   }
               `}
-          </code>
-        </pre>
-      </div>
-      <div className={show === 5 ? "active-algo" : "algo"}>
-        <pre>
-          <code className="javascript-html">
-            {`
+            </code>
+          </pre>
+        </div>
+        <div className={show === 5 ? "active-algo" : "algo"}>
+          <pre>
+            <code className="javascript-html">
+              {`
   function SelectionSort(array) {
     const arr = array.map((x) => {
       return x;
@@ -250,13 +249,13 @@ function Body() {
     return arr;
   }
               `}
-          </code>
-        </pre>
-      </div>
-      <div className={show === 6 ? "active-algo" : "algo"}>
-        <pre>
-          <code className="javascript-html">
-            {`
+            </code>
+          </pre>
+        </div>
+        <div className={show === 6 ? "active-algo" : "algo"}>
+          <pre>
+            <code className="javascript-html">
+              {`
   function HeapSort(arr) {
     for (var i = Math.floor(arr.length / 2) - 1; i >= 0; i--)
       heapify(arr, arr.length, i);
@@ -287,8 +286,9 @@ function Body() {
     return arr;
   }
               `}
-          </code>
-        </pre>
+            </code>
+          </pre>
+        </div>
       </div>
     </div>
   );
