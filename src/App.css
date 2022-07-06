@@ -35,10 +35,11 @@ html {
 }
 .currentAlgoHeader {
   grid-area: header;
-  background-color: #444;
+  background-color: rgb(51, 51, 51);
   font-size: 40px;
   justify-content: center;
   text-align: center;
+  align-content: center;
 }
 
 .activeAlgoCode {
@@ -46,9 +47,10 @@ html {
 }
 
 .displayButton {
+  background-color: rgb(51, 51, 51);
   grid-area: buttons;
   max-width: auto;
-  max-height: 50px;
+  max-height: auto;
   display: flex;
   justify-content: center;
   gap: 5px;
