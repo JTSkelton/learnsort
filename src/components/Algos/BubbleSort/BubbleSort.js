@@ -108,6 +108,7 @@ function BubbleSortDisplay() {
             requestAnimationFrame(animateBubble);
           }
           animateBubble();
+          await wait(500);
         } else if (arr[j] <= arr[j + 1]) {
           context.clearRect((j + 1) * 60, 0, 58, 300);
           context.fillStyle = "#00bc8c";
@@ -132,6 +133,7 @@ function BubbleSortDisplay() {
           context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
         }
         if (j === arr.length - 2 - i) {
+          console.log("here");
           context.clearRect(j * 60, 0, 58, 300);
           context.fillStyle = "#adb5bd";
           context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
@@ -161,7 +163,7 @@ function BubbleSortDisplay() {
           className="btn btn-success"
           onClick={SortThatArray}
         >
-          Begin Sort
+          Start
         </button>
         <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
