@@ -4,11 +4,15 @@ import RandomArr from "../FunctionsForAll/RandomArr";
 import DrawFast from "../FunctionsForAll/DrawFastArray";
 import { wait } from "@testing-library/user-event/dist/utils";
 
+let i = 0;
+let j = 0;
+
 function BubbleSortDisplayFast() {
   const [arrValues, setArrValues] = useState(RandomArr(100));
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={DrawFast} height={600} width={1000} />
   );
+
   const [ButtonText, SetButtonText] = useState("Start");
   const buttonTextRef = useRef(ButtonText);
   useEffect(() => {
@@ -19,27 +23,29 @@ function BubbleSortDisplayFast() {
     setCanvas(<Canvas draw={drawSorted} height={600} width={1000} />);
   }
 
-  const ToggleButtonText = async () => {
+  function ResetButton() {
     const arr = [...arrValues];
-    if (ButtonText === "Stop") {
-      SetButtonText("Reset");
-    }
-    if (ButtonText === "Start") {
-      SetButtonText("Stop");
-    }
+    i = 0;
+    j = 0;
+    setCanvas(
+      <Canvas array={[...arr]} draw={DrawFast} height={600} width={1000} />
+    );
+  }
 
-    if (ButtonText === "Reset") {
-      setCanvas(
-        <Canvas array={[...arr]} draw={DrawFast} height={600} width={1000} />
-      );
+  const ToggleButtonText = async () => {
+    if (ButtonText === "Stop") {
+      SetButtonText("Start");
+    } else if (ButtonText === "Start") {
       SetButtonText("Stop");
+      await wait(50);
+      await SortThatArray();
     }
-    await wait(50);
-    await SortThatArray();
   };
 
   function NewArray() {
     const array = RandomArr(100);
+    i = 0;
+    j = 0;
     setArrValues(array);
     SetButtonText("Start");
     setCanvas(
@@ -50,15 +56,10 @@ function BubbleSortDisplayFast() {
   const drawSorted = async (context) => {
     const arr = [...arrValues];
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    for (let i = 0; i < arr.length - 1; i++) {
-      for (let j = 0; j < arr.length - 1 - i; j++) {
-        console.log(buttonTextRef.current);
-        if (
-          buttonTextRef.current === "Reset" ||
-          buttonTextRef.current === "Start"
-        ) {
-          break;
-        }
+    for (i; i < arr.length - 1; i++) {
+      for (j; j < arr.length - 1 - i; j++) {
+        if (buttonTextRef.current === "Start") return;
+
         if (arr[j] > arr[j + 1]) {
           [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
           context.clearRect((j + 1) * 10, 0, 8, 600);
@@ -114,9 +115,9 @@ function BubbleSortDisplayFast() {
           context.fillStyle = "#00bc8c";
           context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
         }
-
         await wait(10);
       }
+      j = 0;
     }
   };
 
@@ -133,6 +134,9 @@ function BubbleSortDisplayFast() {
           onClick={ToggleButtonText}
         >
           {ButtonText}
+        </button>
+        <button type="button" className="btn btn-success" onClick={ResetButton}>
+          Reset
         </button>
 
         <span>{canvas}</span>
