@@ -67,11 +67,10 @@ function Body() {
       </div>
 
       <div className="currentAlgoHeader">
-        <div className={show === (1 || 7) ? "active-algo" : "algo"}>
+        <div className={show === 1 ? "active-algo" : "algo"}>
           Bubble Sort
           <button
             type="button"
-            id="active-button"
             className="btn btn-success"
             onClick={() => ToggleSwitch(7)}
           >
@@ -80,12 +79,13 @@ function Body() {
         </div>
 
         <div className={show === 2 ? "active-algo" : "algo"}>Quick Sort</div>
-        <div className={show === (3 || 8) ? "active-algo" : "algo"}>
+
+        <div className={show === 3 ? "active-algo" : "algo"}>
           Merge Sort
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => ToggleSwitch(8)}
+            onClick={() => ToggleSwitch(9)}
           >
             Merge Sort Fast
           </button>
@@ -99,18 +99,28 @@ function Body() {
         </div>
 
         <div className={show === 6 ? "active-algo" : "algo"}>Heap Sort</div>
-      </div>
 
-      <div className={show === 7 ? "active-algo-fast" : "algo"}>
-        <React.Fragment>
-          <BubbleSortDisplayFast />
-        </React.Fragment>
-      </div>
+        <div className={show === 7 ? "active-algo" : "algo"}>
+          Bubble Sort Fast
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => ToggleSwitch(1)}
+          >
+            Bubble Sort Slow
+          </button>
+        </div>
 
-      <div className={show === 8 ? "active-algo-fast" : "algo"}>
-        <React.Fragment>
-          <MergeSortDisplayFast />
-        </React.Fragment>
+        <div className={show === 9 ? "active-algo" : "algo"}>
+          Merge Sort
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => ToggleSwitch(3)}
+          >
+            Merge Sort Slow
+          </button>
+        </div>
       </div>
 
       <div className={show === 1 ? "active-algo" : "algo"}>
@@ -144,6 +154,18 @@ function Body() {
       <div className={show === 6 ? "active-algo" : "algo"}>
         <React.Fragment>
           <HeapSortDisplay />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 7 ? "active-algo-fast" : "algo"}>
+        <React.Fragment>
+          <BubbleSortDisplayFast />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 9 ? "active-algo-fast" : "algo"}>
+        <React.Fragment>
+          <MergeSortDisplayFast />
         </React.Fragment>
       </div>
 
