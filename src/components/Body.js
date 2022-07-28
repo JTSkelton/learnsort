@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import BubbleSortDisplay from "./Algos/BubbleSort/BubbleSort";
 import QuickSortDisplay from "./Algos/QuickSort";
 import "../App.css";
-import MergeSortDisplay from "./Algos/MergeSort";
+import MergeSortDisplay from "./Algos/MergeSort/MergeSort";
+import MergeSortDisplayFast from "./Algos/MergeSort/FastMergeSort";
 import InsertionSortDisplay from "./Algos/InsertionSort";
 import SelectionSortDisplay from "./Algos/SelectionSort";
 import HeapSortDisplay from "./Algos/HeapSort";
@@ -57,6 +58,7 @@ function Body() {
         </button>
         <button
           type="button"
+          id="active-button"
           className="btn btn-success"
           onClick={() => ToggleSwitch(6)}
         >
@@ -65,19 +67,29 @@ function Body() {
       </div>
 
       <div className="currentAlgoHeader">
-        <div className={show === 1 || 7 ? "active-algo" : "algo"}>
+        <div className={show === (1 || 7) ? "active-algo" : "algo"}>
           Bubble Sort
           <button
             type="button"
+            id="active-button"
             className="btn btn-success"
             onClick={() => ToggleSwitch(7)}
           >
-            Bubble Sort
+            Bubble Sort Fast
           </button>
         </div>
 
         <div className={show === 2 ? "active-algo" : "algo"}>Quick Sort</div>
-        <div className={show === 3 ? "active-algo" : "algo"}>Merge Sort</div>
+        <div className={show === (3 || 8) ? "active-algo" : "algo"}>
+          Merge Sort
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => ToggleSwitch(8)}
+          >
+            Merge Sort Fast
+          </button>
+        </div>
 
         <div className={show === 4 ? "active-algo" : "algo"}>
           Insertion Sort
@@ -92,6 +104,12 @@ function Body() {
       <div className={show === 7 ? "active-algo-fast" : "algo"}>
         <React.Fragment>
           <BubbleSortDisplayFast />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 8 ? "active-algo-fast" : "algo"}>
+        <React.Fragment>
+          <MergeSortDisplayFast />
         </React.Fragment>
       </div>
 

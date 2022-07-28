@@ -7,7 +7,7 @@ import { wait } from "@testing-library/user-event/dist/utils";
 let i = 0;
 let j = 0;
 
-function BubbleSortDisplayFast() {
+function MergeSortDisplayFast() {
   const [arrValues, setArrValues] = useState(RandomArr(100));
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={DrawFast} height={600} width={1000} />
@@ -121,7 +121,7 @@ function BubbleSortDisplayFast() {
   };
 
   return (
-    <div className="bubbleSortFast">
+    <div className="mergeSortFast">
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
           New Array
@@ -144,4 +144,4 @@ function BubbleSortDisplayFast() {
   );
 }
 
-export default BubbleSortDisplayFast;
+export default MergeSortDisplayFast;
