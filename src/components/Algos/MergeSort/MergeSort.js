@@ -20,6 +20,7 @@ const mergeSort = (array) => {
 const merge = (leftArr, rightArr) => {
   const output = [];
   let leftIndex = 0;
+
   let rightIndex = 0;
 
   while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
@@ -74,103 +75,189 @@ function MergeSortDisplay() {
     );
   }
 
+  async function animateSwap(
+    context,
+    animateStartIndex,
+    animateEndIndex,
+    leftElement,
+    rightElement
+  ) {
+    context.clearRect(animateStartIndex * 60, 0, 58, 300);
+    context.fillStyle = "#e74c3c";
+    context.fillRect(
+      animateStartIndex * 60,
+      300 - 30 * leftElement,
+      58,
+      30 * leftElement
+    );
+
+    context.clearRect(animateEndIndex * 60, 0, 58, 300);
+    context.fillStyle = "#e74c3c";
+    context.fillRect(
+      animateEndIndex * 60,
+      300 - 30 * rightElement,
+      58,
+      30 * rightElement
+    );
+
+    await wait(300);
+
+    //swap
+    context.clearRect(animateStartIndex * 60, 0, 58, 300);
+    context.fillStyle = "#00bc8c";
+    context.fillRect(
+      animateStartIndex * 60,
+      300 - 30 * rightElement,
+      58,
+      30 * rightElement
+    );
+
+    context.clearRect(animateEndIndex * 60, 0, 58, 300);
+    context.fillStyle = "#f39c12";
+    context.fillRect(
+      animateEndIndex * 60,
+      300 - 30 * leftElement,
+      58,
+      30 * leftElement
+    );
+  }
+
+  async function animateNonSwap(
+    context,
+    animateStartIndex,
+    animateEndIndex,
+    leftElement,
+    rightElement
+  ) {
+    context.clearRect(animateStartIndex * 60, 0, 58, 300);
+    context.fillStyle = "#00bc8c";
+    context.fillRect(
+      animateStartIndex * 60,
+      300 - 30 * leftElement,
+      58,
+      30 * leftElement
+    );
+
+    context.clearRect(animateEndIndex * 60, 0, 58, 300);
+    context.fillStyle = "#00bc8c";
+    context.fillRect(
+      animateEndIndex * 60,
+      300 - 30 * rightElement,
+      58,
+      30 * rightElement
+    );
+  }
+
+  async function animateHighligh(
+    context,
+    animateStartIndex,
+    animateEndIndex,
+    leftElement,
+    rightElement
+  ) {
+    context.clearRect(animateStartIndex * 60, 0, 58, 300);
+    context.fillStyle = "#3498db";
+    context.fillRect(
+      animateStartIndex * 60,
+      300 - 30 * leftElement,
+      58,
+      30 * leftElement
+    );
+
+    context.clearRect(animateEndIndex * 60, 0, 58, 300);
+    context.fillStyle = "#3498db";
+    context.fillRect(
+      animateEndIndex * 60,
+      300 - 30 * rightElement,
+      58,
+      30 * rightElement
+    );
+  }
+
   const drawSorted = async (context) => {
     const array = [...arrValues];
+    let animateStartIndex = 0;
+    let animateEndIndex = 1;
 
     const mergeSort = async (array) => {
       if (array.length <= 1) {
         return array;
       }
       const middleIndex = Math.floor(array.length / 2);
-      console.log("MI " + middleIndex);
       const leftArray = array.slice(0, middleIndex);
-      console.log("LA " + leftArray);
+      console.log("Left Array " + leftArray);
       const rightArray = array.slice(middleIndex);
-      console.log("RA " + rightArray);
-      console.log("WAIT");
+      console.log("Right Array " + rightArray);
+      console.log("WAIT Up");
+      const leftArrLength = array.slice(0, middleIndex).length;
+      const rightArrLength = array.slice(0, middleIndex).length;
       await waitForPress();
       return merge(
         await mergeSort(leftArray),
         await mergeSort(rightArray),
-        middleIndex
+        middleIndex,
+        leftArrLength,
+        rightArrLength
       );
     };
 
-    const merge = async (leftArr, rightArr, midIndx) => {
+    const merge = async (
+      leftArr,
+      rightArr,
+      midIndx,
+      leftArrayLength,
+      rightArrayLength
+    ) => {
       const output = [];
       let leftIndex = 0;
       let rightIndex = 0;
 
+      console.log("MIDI " + midIndx);
+
       while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
         const leftElement = leftArr[leftIndex];
-        console.log("LE " + leftElement);
+        console.log("Left Element " + leftElement);
         const rightElement = rightArr[rightIndex];
-        console.log("RE " + rightElement);
+        console.log("Right Element " + rightElement);
 
-        context.clearRect(array[leftIndex] * 60, 0, 58, 300);
-        context.fillStyle = "#3498db";
-        context.fillRect(
-          leftIndex * 60,
-          300 - 30 * leftElement,
-          58,
-          30 * leftElement
+        animateHighligh(
+          context,
+          animateStartIndex,
+          animateEndIndex,
+          leftElement,
+          rightElement
         );
 
-        context.clearRect(array[leftIndex] * 60, 0, 58, 300);
-        context.fillStyle = "#3498db";
-        context.fillRect(
-          leftIndex * 60,
-          300 - 30 * leftElement,
-          58,
-          30 * leftElement
-        );
-
+        console.log("WAIT LOW");
         await waitForPress();
 
         if (leftElement <= rightElement) {
+          animateNonSwap(
+            context,
+            animateStartIndex,
+            animateEndIndex,
+            leftElement,
+            rightElement
+          );
+
+          console.log("WAIT LOW");
+          await waitForPress();
           output.push(leftElement);
           console.log("Output " + output);
           leftIndex++;
+          animateStartIndex = leftArrayLength + midIndx + 1;
+          animateEndIndex = animateStartIndex + 1;
         } else {
-          //fill with red
-          context.clearRect(leftIndex * 60, 0, 58, 300);
-          context.fillStyle = "#e74c3c";
-          context.fillRect(
-            leftIndex * 60,
-            300 - 30 * leftElement,
-            58,
-            30 * leftElement
+          animateSwap(
+            context,
+            animateStartIndex,
+            animateEndIndex,
+            leftElement,
+            rightElement
           );
 
-          context.clearRect(midIndx * 60, 0, 58, 300);
-          context.fillStyle = "#e74c3c";
-          context.fillRect(
-            midIndx * 60,
-            300 - 30 * rightElement,
-            58,
-            30 * rightElement
-          );
-
-          await wait(300);
-
-          //swap
-          context.clearRect(leftIndex * 60, 0, 58, 300);
-          context.fillStyle = "#00bc8c";
-          context.fillRect(
-            leftIndex * 60,
-            300 - 30 * rightElement,
-            58,
-            30 * rightElement
-          );
-
-          context.clearRect(midIndx * 60, 0, 58, 300);
-          context.fillStyle = "#f39c12";
-          context.fillRect(
-            midIndx * 60,
-            300 - 30 * leftElement,
-            58,
-            30 * leftElement
-          );
+          animateStartIndex = leftArrayLength + midIndx + 1;
+          animateEndIndex = animateStartIndex + 1;
 
           output.push(rightElement);
           console.log("Output " + output);
@@ -189,6 +276,7 @@ function MergeSortDisplay() {
             ...rightArr.slice(rightIndex),
           ]
       );
+
       return [
         ...output,
         ...leftArr.slice(leftIndex),
