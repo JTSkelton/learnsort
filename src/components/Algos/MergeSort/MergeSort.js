@@ -99,9 +99,7 @@ function MergeSortDisplay() {
       58,
       30 * rightElement
     );
-
     await wait(300);
-
     //swap
     context.clearRect(animateStartIndex * 60, 0, 58, 300);
     context.fillStyle = "#00bc8c";
@@ -148,7 +146,7 @@ function MergeSortDisplay() {
     );
   }
 
-  async function animateHighligh(
+  async function animateHighlight(
     context,
     animateStartIndex,
     animateEndIndex,
@@ -176,28 +174,33 @@ function MergeSortDisplay() {
 
   const drawSorted = async (context) => {
     const array = [...arrValues];
-    let animateStartIndex = 0;
-    let animateEndIndex = 1;
+    const refArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    const mergeSort = async (array) => {
+    const mergeSort = async (array, refArray) => {
       if (array.length <= 1) {
         return array;
       }
       const middleIndex = Math.floor(array.length / 2);
+
+      const refLeftArray = refArray.slice(0, middleIndex);
+      console.log("Left Array Ref " + refLeftArray);
+      const refRightArray = refArray.slice(middleIndex);
+      console.log("Right Array Ref " + refRightArray);
+
       const leftArray = array.slice(0, middleIndex);
       console.log("Left Array " + leftArray);
       const rightArray = array.slice(middleIndex);
       console.log("Right Array " + rightArray);
-      console.log("WAIT Up");
-      const leftArrLength = array.slice(0, middleIndex).length;
-      const rightArrLength = array.slice(0, middleIndex).length;
+
+      // const leftArrLength = array.slice(0, middleIndex).length;
+      // const rightArrLength = array.slice(0, middleIndex).length;
       await waitForPress();
       return merge(
-        await mergeSort(leftArray),
-        await mergeSort(rightArray),
+        await mergeSort(leftArray, refLeftArray),
+        await mergeSort(rightArray, refRightArray),
         middleIndex,
-        leftArrLength,
-        rightArrLength
+        refLeftArray,
+        refRightArray
       );
     };
 
@@ -205,22 +208,29 @@ function MergeSortDisplay() {
       leftArr,
       rightArr,
       midIndx,
-      leftArrayLength,
-      rightArrayLength
+      leftArrayRef,
+      rightArrayRef
     ) => {
       const output = [];
       let leftIndex = 0;
       let rightIndex = 0;
 
-      console.log("MIDI " + midIndx);
-
       while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
-        const leftElement = leftArr[leftIndex];
+        let leftElement = leftArr[leftIndex];
         console.log("Left Element " + leftElement);
-        const rightElement = rightArr[rightIndex];
+        console.log("Left Index " + leftIndex);
+        let rightElement = rightArr[rightIndex];
         console.log("Right Element " + rightElement);
+        console.log("Right Index " + rightIndex);
+        const animateStartIndex = leftArrayRef[leftIndex];
+        console.log("AnimateIndex: " + animateStartIndex);
+        const animateEndIndex = rightArrayRef[rightIndex];
+        console.log("Output " + output);
 
-        animateHighligh(
+        // if (rightIndex > 0) {
+        //   leftElement = output[leftIndex];
+        // }
+        animateHighlight(
           context,
           animateStartIndex,
           animateEndIndex,
@@ -228,10 +238,9 @@ function MergeSortDisplay() {
           rightElement
         );
 
-        console.log("WAIT LOW");
         await waitForPress();
 
-        if (leftElement <= rightElement) {
+        if (leftElement < rightElement) {
           animateNonSwap(
             context,
             animateStartIndex,
@@ -239,14 +248,10 @@ function MergeSortDisplay() {
             leftElement,
             rightElement
           );
-
-          console.log("WAIT LOW");
-          await waitForPress();
           output.push(leftElement);
-          console.log("Output " + output);
+
           leftIndex++;
-          animateStartIndex = leftArrayLength + midIndx + 1;
-          animateEndIndex = animateStartIndex + 1;
+          await waitForPress();
         } else {
           animateSwap(
             context,
@@ -255,17 +260,13 @@ function MergeSortDisplay() {
             leftElement,
             rightElement
           );
-
-          animateStartIndex = leftArrayLength + midIndx + 1;
-          animateEndIndex = animateStartIndex + 1;
-
           output.push(rightElement);
-          console.log("Output " + output);
+
           rightIndex++;
+          await waitForPress();
         }
       }
-      console.log("LEFT FINAL " + leftArr.slice(leftIndex));
-      console.log("RIGHT FINAL " + rightArr.slice(rightIndex));
+
       console.log(
         "Returned Array " +
           [
@@ -283,7 +284,7 @@ function MergeSortDisplay() {
         ...rightArr.slice(rightIndex),
       ];
     };
-    mergeSort(array);
+    mergeSort(array, refArray);
   };
 
   return (
