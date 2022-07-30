@@ -214,6 +214,7 @@ function MergeSortDisplay() {
       const output = [];
       let leftIndex = 0;
       let rightIndex = 0;
+      let tempLeft = 0;
 
       while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
         let leftElement = leftArr[leftIndex];
@@ -222,14 +223,12 @@ function MergeSortDisplay() {
         let rightElement = rightArr[rightIndex];
         console.log("Right Element " + rightElement);
         console.log("Right Index " + rightIndex);
-        const animateStartIndex = leftArrayRef[leftIndex];
-        console.log("AnimateIndex: " + animateStartIndex);
-        const animateEndIndex = rightArrayRef[rightIndex];
+        let animateStartIndex = leftArrayRef[tempLeft];
+        console.log("AnimateStartIndex: " + animateStartIndex);
+        let animateEndIndex = rightArrayRef[rightIndex];
+        console.log("AnimateEndIndex: " + animateEndIndex);
         console.log("Output " + output);
 
-        // if (rightIndex > 0) {
-        //   leftElement = output[leftIndex];
-        // }
         animateHighlight(
           context,
           animateStartIndex,
@@ -249,8 +248,9 @@ function MergeSortDisplay() {
             rightElement
           );
           output.push(leftElement);
-
           leftIndex++;
+          tempLeft++;
+
           await waitForPress();
         } else {
           animateSwap(
@@ -261,8 +261,9 @@ function MergeSortDisplay() {
             rightElement
           );
           output.push(rightElement);
-
           rightIndex++;
+          let tempLeft = animateEndIndex - 1;
+          console.log("TempL " + tempLeft);
           await waitForPress();
         }
       }
