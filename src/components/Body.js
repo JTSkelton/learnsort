@@ -4,7 +4,7 @@ import QuickSortDisplay from "./Algos/QuickSort";
 import "../App.css";
 import MergeSortDisplay from "./Algos/MergeSort/MergeSort";
 import MergeSortDisplayFast from "./Algos/MergeSort/FastMergeSort";
-import InsertionSortDisplay from "./Algos/InsertionSort";
+import InsertionSortDisplay from "./Algos/InsertionSort/InsertionSort";
 import SelectionSortDisplay from "./Algos/SelectionSort";
 import HeapSortDisplay from "./Algos/HeapSort";
 import BubbleSortDisplayFast from "./Algos/BubbleSort/FastBubbleSort";
@@ -253,16 +253,20 @@ function Body() {
           <pre>
             <code className="javascript-html">
               {`
-  function InsertionSort(arr) {
-    for (let i = 1; i < arr.length; i++) {
-      for (let j = i; j > 0; j--) {
-        if (arr[j] < arr[j - 1]) {
-          const tempValue = arr[j];
-          arr[j] = arr[j - 1];
-          arr[j - 1] = tempValue;
-        } else break;
+  function InsertionSort(arr, n) {
+    let i, key, j;
+    for (i = 1; i < n; i++) {
+      key = arr[i];
+      j = i - 1;
+  
+      while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j = j - 1;
       }
+      arr[j + 1] = key;
+      console.log(arr);
     }
+  
     return arr;
   }
               `}
