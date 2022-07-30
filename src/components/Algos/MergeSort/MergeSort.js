@@ -218,16 +218,17 @@ function MergeSortDisplay() {
 
       while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
         let leftElement = leftArr[leftIndex];
-        console.log("Left Element " + leftElement);
-        console.log("Left Index " + leftIndex);
+        console.log("1) Left Element " + leftElement);
+        console.log("2) Left Index " + leftIndex);
         let rightElement = rightArr[rightIndex];
-        console.log("Right Element " + rightElement);
-        console.log("Right Index " + rightIndex);
-        let animateStartIndex = leftArrayRef[tempLeft];
-        console.log("AnimateStartIndex: " + animateStartIndex);
+        console.log("3) Right Element " + rightElement);
+        console.log("4) Right Index " + rightIndex);
+        console.log("??? " + leftArrayRef[leftIndex]);
+        let animateStartIndex = leftArrayRef[leftIndex] + tempLeft;
+        console.log("5) AnimateStartIndex: " + animateStartIndex);
         let animateEndIndex = rightArrayRef[rightIndex];
-        console.log("AnimateEndIndex: " + animateEndIndex);
-        console.log("Output " + output);
+        console.log("6) AnimateEndIndex: " + animateEndIndex);
+        console.log("7) Output " + output);
 
         animateHighlight(
           context,
@@ -239,7 +240,7 @@ function MergeSortDisplay() {
 
         await waitForPress();
 
-        if (leftElement < rightElement) {
+        if (leftElement <= rightElement) {
           animateNonSwap(
             context,
             animateStartIndex,
@@ -249,7 +250,7 @@ function MergeSortDisplay() {
           );
           output.push(leftElement);
           leftIndex++;
-          tempLeft++;
+          console.log("8) Left Index " + leftIndex);
 
           await waitForPress();
         } else {
@@ -260,16 +261,23 @@ function MergeSortDisplay() {
             leftElement,
             rightElement
           );
+          if (leftIndex > 0) {
+            animateStartIndex = 0;
+            tempLeft = animateEndIndex - 1;
+          } else {
+            animateStartIndex = 0;
+            tempLeft++;
+          }
           output.push(rightElement);
+
           rightIndex++;
-          let tempLeft = animateEndIndex - 1;
-          console.log("TempL " + tempLeft);
+          console.log("9) TempLeft " + tempLeft);
           await waitForPress();
         }
       }
 
       console.log(
-        "Returned Array " +
+        "10) Returned Array " +
           [
             ...output,
 

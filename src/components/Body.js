@@ -56,14 +56,14 @@ function Body() {
         >
           Selection Sort
         </button>
-        <button
+        {/* <button
           type="button"
           id="active-button"
           className="btn btn-success"
           onClick={() => ToggleSwitch(6)}
         >
           Heap Sort
-        </button>
+        </button> */}
       </div>
 
       <div className="currentAlgoHeader">
