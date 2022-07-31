@@ -82,145 +82,59 @@ function InsertionSortDisplay() {
           context.clearRect(j * 60, 0, 58, 300);
           context.fillStyle = "#e74c3c";
           context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
+          await wait(200);
           await waitForPress();
         }
-        //PRE
 
-        //POST
-        arr[j + 1] = arr[j];
+        [arr[j + 1], arr[j]] = [arr[j], arr[j + 1]];
+
+        let x = (j + 1) * 60;
+        let xx = j * 60;
+        let dx = 1;
+        // eslint-disable-next-line no-loop-func
+        function animateBubble() {
+          context.clearRect(j * 60, 0, 60, 300);
+          context.fillStyle = "#f39c12";
+          context.fillRect(x, 300 - 30 * arr[j], 58, 30 * arr[j]);
+
+          context.clearRect((j + 1) * 60, 0, 58, 300);
+          context.fillStyle = "#00bc8c";
+          context.fillRect(xx, 300 - 30 * arr[j + 1], 58, 30 * arr[j + 1]);
+
+          if (x + 60 === (j + 1) * 60) {
+            return;
+          }
+          x -= dx;
+          xx += dx;
+          requestAnimationFrame(animateBubble);
+        }
+        animateBubble();
+        await wait(500);
         j = j - 1;
-        context.clearRect((j + 1) * 60, 0, 58, 300);
-        context.fillStyle = "#00bc8c";
-        context.fillRect(j + 1 * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
-        context.clearRect(j * 60, 0, 58, 300);
-        context.fillStyle = "#00bc8c";
-        context.fillRect(j * 60, 300 - 30 * arr[j + 1], 58, 30 * arr[j + 1]);
+
         await waitForPress();
       }
-
       arr[j + 1] = key;
     }
-
-    // for (let i = 0; i < arr.length - 1; i++) {
-    //   for (let j = 0; j < arr.length - 1 - i; j++) {
-    //     console.log(j);
-    //     if (arr[j] > arr[j + 1]) {
-    //       context.clearRect((j + 1) * 60, 0, 58, 300);
-    //       context.fillStyle = "#e74c3c";
-    //       context.fillRect(
-    //         (j + 1) * 60,
-    //         300 - 30 * arr[j + 1],
-    //         58,
-    //         30 * arr[j + 1]
-    //       );
-
-    //       context.clearRect(j * 60, 0, 58, 300);
-    //       context.fillStyle = "#e74c3c";
-    //       context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
-
-    //       context.clearRect((j - 1) * 60, 0, 58, 300);
-    //       context.fillStyle = "#adb5bd";
-    //       context.fillRect(
-    //         (j - 1) * 60,
-    //         300 - 30 * arr[j - 1],
-    //         58,
-    //         30 * arr[j - 1]
-    //       );
-
-    //       await wait(300);
-
-    //       [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-
-    //       let x = (j + 1) * 60;
-    //       let xx = j * 60;
-    //       let dx = 1;
-    //       function animateBubble() {
-    //         context.clearRect((j - 1) * 60, 0, 60, 300);
-    //         context.fillStyle = "#adb5bd";
-    //         context.fillRect(
-    //           (j - 1) * 60,
-    //           300 - 30 * arr[j - 1],
-    //           58,
-    //           30 * arr[j - 1]
-    //         );
-
-    //         context.clearRect(j * 60, 0, 60, 300);
-    //         context.fillStyle = "#f39c12";
-    //         context.fillRect(x, 300 - 30 * arr[j], 58, 30 * arr[j]);
-
-    //         context.clearRect((j + 1) * 60, 0, 58, 300);
-    //         context.fillStyle = "#00bc8c";
-    //         context.fillRect(xx, 300 - 30 * arr[j + 1], 58, 30 * arr[j + 1]);
-
-    //         if (x + 60 === (j + 1) * 60) {
-    //           return;
-    //         }
-    //         x -= dx;
-    //         xx += dx;
-    //         requestAnimationFrame(animateBubble);
-    //       }
-    //       animateBubble();
-    //       await wait(500);
-    //     } else if (arr[j] <= arr[j + 1]) {
-    //       context.clearRect((j + 1) * 60, 0, 58, 300);
-    //       context.fillStyle = "#00bc8c";
-    //       context.fillRect(
-    //         (j + 1) * 60,
-    //         300 - 30 * arr[j + 1],
-    //         58,
-    //         30 * arr[j + 1]
-    //       );
-
-    //       context.clearRect((j - 1) * 60, 0, 58, 300);
-    //       context.fillStyle = "#adb5bd";
-    //       context.fillRect(
-    //         (j - 1) * 60,
-    //         300 - 30 * arr[j - 1],
-    //         58,
-    //         30 * arr[j - 1]
-    //       );
-
-    //       context.clearRect(j * 60, 0, 58, 300);
-    //       context.fillStyle = "#f39c12";
-    //       context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
-    //     }
-    //     if (j === arr.length - 2 - i) {
-    //       console.log("here");
-    //       context.clearRect(j * 60, 0, 58, 300);
-    //       context.fillStyle = "#adb5bd";
-    //       context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
-    //     }
-    //     if (arr.length - 1 - i === 1) {
-    //       context.clearRect(j * 60, 0, 58, 300);
-    //       context.fillStyle = "#00bc8c";
-    //       context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
-    //     }
-    //     await wait(200);
-    //     await waitForPress();
-    //   }
-    // }
   };
 
   return (
-    <div className="InsertionSort">
-      <div className="card-header">Insertion Sort</div>
+    <div className="stepSortBody">
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
-          Generate New Array
+          New Array
         </button>
-        <br></br>
-        <br></br>
+
+        <span>Unsorted Array: {arrValues}</span>
+
         <button
           type="button"
           className="btn btn-success"
           onClick={SortThatArray}
         >
-          Insertion Sort The Array
+          Start
         </button>
-        <br></br>
-        <span>Origional Array: {arrValues}</span>
-        <br></br>
-        <span>Insertion Sorted Array: {sortedArrValues}</span>
+        <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
         <button
           id="next"

@@ -36,7 +36,6 @@ const merge = (leftArr, rightArr) => {
       rightIndex++;
     }
   }
-
   return [
     ...output,
     ...leftArr.slice(leftIndex),
@@ -60,7 +59,7 @@ function MergeSortDisplay() {
     <Canvas array={[...arrValues]} draw={Draw} height={300} width={600} />
   );
 
-  function sortThatArray() {
+  function SortThatArray() {
     const array = [...arrValues];
     setSorted(mergeSort(array));
     setCanvas(<Canvas draw={drawSorted} height={300} width={600} />);
@@ -192,7 +191,7 @@ function MergeSortDisplay() {
       const rightArray = array.slice(middleIndex);
       console.log("Right Array " + rightArray);
 
-      await waitForPress();
+      // await waitForPress();
       return merge(
         await mergeSort(leftArray, refLeftArray),
         await mergeSort(rightArray, refRightArray),
@@ -228,8 +227,8 @@ function MergeSortDisplay() {
           leftElement,
           rightElement
         );
-
-        await waitForPress();
+        await wait(300);
+        // await waitForPress();
 
         if (leftElement <= rightElement) {
           animateNonSwap(
@@ -243,8 +242,8 @@ function MergeSortDisplay() {
           leftIndex++;
           // tempLeft = animateEndIndex - 1;
           console.log("8) Left Index " + leftIndex);
-
-          await waitForPress();
+          await wait(300);
+          // await waitForPress();
         } else {
           animateSwap(
             context,
@@ -258,7 +257,8 @@ function MergeSortDisplay() {
           //temp left needs to follow the swap index
           // tempLeft = animateEndIndex - 1;
           console.log("9) TempLeft " + tempLeft);
-          await waitForPress();
+          await wait(300);
+          // await waitForPress();
         }
       }
 
@@ -283,25 +283,22 @@ function MergeSortDisplay() {
   };
 
   return (
-    <div className="MergeSort">
-      <div className="card-header">Merge Sort</div>
+    <div className="stepSortBody">
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
-          Generate New Array
+          New Array
         </button>
-        <br></br>
-        <br></br>
+
+        <span>Unsorted Array: {arrValues}</span>
+
         <button
           type="button"
           className="btn btn-success"
-          onClick={sortThatArray}
+          onClick={SortThatArray}
         >
-          Merge Sort The Array
+          Start
         </button>
-        <br></br>
-        <span>Origional Array: {arrValues}</span>
-        <br></br>
-        <span>Merge Sorted Array: {sortedArrValues}</span>
+        <span>Sorted Array: {sortedArrValues}</span>
         <span>{canvas}</span>
         <button
           id="next"

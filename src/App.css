@@ -38,9 +38,8 @@ html {
   grid-area: header;
   background-color: rgb(51, 51, 51);
   font-size: 40px;
-  justify-content: center;
+  align-items: right;
   text-align: center;
-  align-content: center;
 }
 
 .activeAlgoCode {
@@ -63,7 +62,7 @@ html {
   padding: 5px;
 }
 
-.bubbleSort {
+.stepSortBody {
   grid-area: algos;
   background-color: rgb(51, 51, 51);
 }

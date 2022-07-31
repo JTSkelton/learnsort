@@ -150,7 +150,7 @@ function BubbleSortDisplay() {
   };
 
   return (
-    <div className="bubbleSort">
+    <div className="stepSortBody">
       <div className="card-body">
         <button type="button" className="btn btn-success" onClick={NewArray}>
           New Array
