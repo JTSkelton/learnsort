@@ -8,15 +8,21 @@ function InsertionSort(arr, n) {
   for (i = 1; i < n; i++) {
     key = arr[i];
     j = i - 1;
-    console.log("key " + key);
 
     while (j >= 0 && arr[j] > key) {
       console.log("Pre " + arr);
+      console.log("Pre j " + arr[j]);
+
+      console.log("Pre +1 " + arr[j + 1]);
+
       arr[j + 1] = arr[j];
+      console.log("Post " + arr);
+      console.log("Post j " + arr[j]);
+      console.log("Post +1 " + arr[j + 1]);
+
       j = j - 1;
     }
     arr[j + 1] = key;
-    console.log(arr);
   }
 
   return arr;
@@ -62,38 +68,37 @@ function InsertionSortDisplay() {
     for (i = 1; i < n; i++) {
       key = arr[i];
       j = i - 1;
-      context.clearRect(i * 60, 0, 58, 300);
-      context.fillStyle = "#3498db";
-      context.fillRect(i * 60, 300 - 30 * arr[i], 58, 30 * arr[i]);
-      console.log(key);
 
-      while (j >= 0 && arr[j] >= key) {
+      while (j >= 0 && arr[j] > key) {
+        if (arr[j] > arr[j + 1]) {
+          context.clearRect((j + 1) * 60, 0, 58, 300);
+          context.fillStyle = "#e74c3c";
+          context.fillRect(
+            (j + 1) * 60,
+            300 - 30 * arr[j + 1],
+            58,
+            30 * arr[j + 1]
+          );
+          context.clearRect(j * 60, 0, 58, 300);
+          context.fillStyle = "#e74c3c";
+          context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
+          await waitForPress();
+        }
+        //PRE
+
+        //POST
         arr[j + 1] = arr[j];
         j = j - 1;
         context.clearRect((j + 1) * 60, 0, 58, 300);
         context.fillStyle = "#00bc8c";
-        context.fillRect(
-          (j + 1) * 60,
-          300 - 30 * arr[j + 1],
-          58,
-          30 * arr[j + 1]
-        );
+        context.fillRect(j + 1 * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
         context.clearRect(j * 60, 0, 58, 300);
-        context.fillStyle = "#f39c12";
-        context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
-
-        context.clearRect((j - 1) * 60, 0, 58, 300);
         context.fillStyle = "#00bc8c";
-        context.fillRect(
-          (j - 1) * 60,
-          300 - 30 * arr[j - 1],
-          58,
-          30 * arr[j - 1]
-        );
+        context.fillRect(j * 60, 300 - 30 * arr[j + 1], 58, 30 * arr[j + 1]);
         await waitForPress();
       }
+
       arr[j + 1] = key;
-      console.log(arr);
     }
 
     // for (let i = 0; i < arr.length - 1; i++) {
