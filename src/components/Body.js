@@ -9,6 +9,7 @@ import SelectionSortDisplay from "./Algos/SelectionSort/SelectionSort";
 import HeapSortDisplay from "./Algos/HeapSort";
 import BubbleSortDisplayFast from "./Algos/BubbleSort/FastBubbleSort";
 import InsertionSortDisplayFast from "./Algos/InsertionSort/FastInsertionSort";
+import SelectionSortDisplayFast from "./Algos/SelectionSort/FastSelectionSort";
 
 function Body() {
   const [show, setShow] = useState(() => {
@@ -59,7 +60,6 @@ function Body() {
         </button>
         {/* <button
           type="button"
-          id="active-button"
           className="btn btn-success"
           onClick={() => ToggleSwitch(6)}
         >
@@ -137,6 +137,28 @@ function Body() {
 
         <div className={show === 5 ? "active-algo" : "algo"}>
           Selection Sort
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(11)}
+            >
+              Sort Fast
+            </button>
+          </div>
+        </div>
+
+        <div className={show === 11 ? "active-algo" : "algo"}>
+          Selection Sort
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(5)}
+            >
+              Sort Slow
+            </button>
+          </div>
         </div>
 
         <div className={show === 6 ? "active-algo" : "algo"}>Heap Sort</div>
@@ -202,6 +224,12 @@ function Body() {
       <div className={show === 10 ? "active-algo-fast" : "algo"}>
         <React.Fragment>
           <InsertionSortDisplayFast />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 11 ? "active-algo-fast" : "algo"}>
+        <React.Fragment>
+          <SelectionSortDisplayFast />
         </React.Fragment>
       </div>
 

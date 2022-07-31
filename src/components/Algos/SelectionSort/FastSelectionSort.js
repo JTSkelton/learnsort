@@ -48,45 +48,57 @@ function SelectionSortDisplayFast() {
 
   const drawSorted = async (context) => {
     const arr = [...arrValues];
-    const n = arr.length;
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    let i, key, j;
-    for (i = 1; i < n; i++) {
-      key = arr[i];
-      j = i - 1;
 
-      while (j >= 0 && arr[j] > key) {
-        if (arr[j] > arr[j + 1]) {
-          context.clearRect((j + 1) * 10, 0, 8, 600);
-          context.fillStyle = "#00bc8c";
-          context.fillRect(
-            (j + 1) * 10,
-            600 - 50 * arr[j + 1],
-            8,
-            50 * arr[j + 1]
-          );
-          context.clearRect(j * 10, 0, 8, 600);
-          context.fillStyle = "#f39c12";
-          context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
-          await wait(10);
+    for (let i = 0; i < arr.length - 1; i++) {
+      let minIndex = i;
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[minIndex]) {
+          minIndex = j;
         }
+        // context.clearRect(j * 10, 0, 8, 600);
+        // context.fillStyle = "#00bc8c";
+        // context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
 
-        [arr[j + 1], arr[j]] = [arr[j], arr[j + 1]];
-        context.clearRect((j + 1) * 10, 0, 8, 600);
-        context.fillStyle = "#00bc8c";
-        context.fillRect(
-          (j + 1) * 10,
-          600 - 50 * arr[j + 1],
-          8,
-          50 * arr[j + 1]
-        );
-        context.clearRect(j * 10, 0, 8, 600);
-        context.fillStyle = "#00bc8c";
-        context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
-        await wait(10);
-        j = j - 1;
+        // context.clearRect((j - 1) * 10, 0, 8, 600);
+        // context.fillStyle = "#adb5bd";
+        // context.fillRect(
+        //   (j - 1) * 10,
+        //   600 - 50 * arr[j - 1],
+        //   8,
+        //   50 * arr[j - 1]
+        // );
+        // await wait(20);
       }
-      arr[j + 1] = key;
+      // await waitForPress();
+      if (arr[i] > arr[minIndex]) {
+        context.clearRect(minIndex * 10, 0, 8, 600);
+        context.fillStyle = "#e74c3c";
+        context.fillRect(
+          minIndex * 10,
+          600 - 50 * arr[minIndex],
+          8,
+          50 * arr[minIndex]
+        );
+        context.clearRect(i * 10, 0, 8, 600);
+        context.fillStyle = "#e74c3c";
+        context.fillRect(i * 10, 600 - 50 * arr[i], 8, 50 * arr[i]);
+        await wait(40);
+      }
+
+      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+      context.clearRect(minIndex * 10, 0, 8, 600);
+      context.fillStyle = "#00bc8c";
+      context.fillRect(
+        minIndex * 10,
+        600 - 50 * arr[minIndex],
+        8,
+        50 * arr[minIndex]
+      );
+      context.clearRect(i * 10, 0, 8, 600);
+      context.fillStyle = "#00bc8c";
+      context.fillRect(i * 10, 600 - 50 * arr[i], 8, 50 * arr[i]);
+      await wait(20);
     }
   };
 
