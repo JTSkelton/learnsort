@@ -5,9 +5,10 @@ import "../App.css";
 import MergeSortDisplay from "./Algos/MergeSort/MergeSort";
 import MergeSortDisplayFast from "./Algos/MergeSort/FastMergeSort";
 import InsertionSortDisplay from "./Algos/InsertionSort/InsertionSort";
-import SelectionSortDisplay from "./Algos/SelectionSort";
+import SelectionSortDisplay from "./Algos/SelectionSort/SelectionSort";
 import HeapSortDisplay from "./Algos/HeapSort";
 import BubbleSortDisplayFast from "./Algos/BubbleSort/FastBubbleSort";
+import InsertionSortDisplayFast from "./Algos/InsertionSort/FastInsertionSort";
 
 function Body() {
   const [show, setShow] = useState(() => {
@@ -69,53 +70,82 @@ function Body() {
       <div className="currentAlgoHeader">
         <div className={show === 1 ? "active-algo" : "algo"}>
           Bubble Sort
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={() => ToggleSwitch(7)}
-          >
-            Bubble Sort Fast
-          </button>
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(7)}
+            >
+              Sort Fast
+            </button>
+          </div>
+        </div>
+
+        <div className={show === 7 ? "active-algo" : "algo"}>
+          Bubble Sort Fast
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(1)}
+            >
+              Sort Slow
+            </button>
+          </div>
         </div>
 
         <div className={show === 2 ? "active-algo" : "algo"}>Quick Sort</div>
 
         <div className={show === 3 ? "active-algo" : "algo"}>
           Merge Sort
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={() => ToggleSwitch(9)}
-          >
-            Merge Sort Fast
-          </button>
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(9)}
+            >
+              Sort Fast
+            </button>
+          </div>
         </div>
 
         <div className={show === 4 ? "active-algo" : "algo"}>
           Insertion Sort
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(10)}
+            >
+              Sort Fast
+            </button>
+          </div>
         </div>
+
+        <div className={show === 10 ? "active-algo" : "algo"}>
+          Insertion Sort Fast
+          <div butt>
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={() => ToggleSwitch(4)}
+            >
+              Sort Slow
+            </button>
+          </div>
+        </div>
+
         <div className={show === 5 ? "active-algo" : "algo"}>
           Selection Sort
         </div>
 
         <div className={show === 6 ? "active-algo" : "algo"}>Heap Sort</div>
 
-        <div className={show === 7 ? "active-algo" : "algo"}>
-          Bubble Sort Fast
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={() => ToggleSwitch(1)}
-          >
-            Bubble Sort Slow
-          </button>
-        </div>
-
         <div className={show === 9 ? "active-algo" : "algo"}>
           Merge Sort
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-outline-success"
             onClick={() => ToggleSwitch(3)}
           >
             Merge Sort Slow
@@ -166,6 +196,12 @@ function Body() {
       <div className={show === 9 ? "active-algo-fast" : "algo"}>
         <React.Fragment>
           <MergeSortDisplayFast />
+        </React.Fragment>
+      </div>
+
+      <div className={show === 10 ? "active-algo-fast" : "algo"}>
+        <React.Fragment>
+          <InsertionSortDisplayFast />
         </React.Fragment>
       </div>
 
@@ -224,7 +260,6 @@ function Body() {
     const middleIndex = Math.floor(array.length / 2);
     const leftArray = array.slice(0, middleIndex);
     const rightArray = array.slice(middleIndex);
-  
     return merge(mergeSort(leftArray), mergeSort(rightArray));
   };
   
@@ -236,7 +271,6 @@ function Body() {
     while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
       const leftElement = leftArr[leftIndex];
       const rightElement = rightArr[rightIndex];
-  
       if (leftElement < rightElement) {
         output.push(leftElement);
         leftIndex++;
@@ -245,6 +279,12 @@ function Body() {
         rightIndex++;
       }
     }
+    return [
+      ...output,
+      ...leftArr.slice(leftIndex),
+      ...rightArr.slice(rightIndex),
+    ];
+  };
               `}
             </code>
           </pre>
