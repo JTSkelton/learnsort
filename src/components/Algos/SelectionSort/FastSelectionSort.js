@@ -11,6 +11,7 @@ let minIndex;
 function SelectionSortDisplayFast() {
   const [arrValues, setArrValues] = useState(RandomArr(100));
   const [drawArrValues, setDrawArrValues] = useState([...arrValues]);
+  const [disable, setDisable] = useState(false);
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={DrawFast} height={600} width={1000} />
   );
@@ -38,8 +39,10 @@ function SelectionSortDisplayFast() {
   const ToggleButtonText = async () => {
     if (ButtonText === "Stop") {
       SetButtonText("Start");
+      setDisable(false);
     } else if (ButtonText === "Start") {
       SetButtonText("Stop");
+      setDisable(true);
       await wait(50);
       await SortThatArray();
     }
@@ -58,9 +61,6 @@ function SelectionSortDisplayFast() {
 
   const drawSorted = async (context) => {
     const arr = [...drawArrValues];
-    console.log("i" + i);
-    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    console.log("pre " + arr);
     for (i; i < arr.length - 1; i++) {
       minIndex = i;
       for (j = i + 1; j < arr.length; j++) {
@@ -108,7 +108,6 @@ function SelectionSortDisplayFast() {
           8,
           50 * arr[minIndex]
         );
-        console.log("post " + arr);
       }
       //fills last piece green
       if (i === arr.length - 2) {
@@ -129,7 +128,12 @@ function SelectionSortDisplayFast() {
   return (
     <div className="bubbleSortFast">
       <div className="card-body">
-        <button type="button" className="btn btn-success" onClick={NewArray}>
+        <button
+          type="button"
+          className="btn btn-success"
+          disabled={disable}
+          onClick={NewArray}
+        >
           New Array
         </button>
 
@@ -140,7 +144,12 @@ function SelectionSortDisplayFast() {
         >
           {ButtonText}
         </button>
-        <button type="button" className="btn btn-success" onClick={ResetButton}>
+        <button
+          type="button"
+          className="btn btn-success"
+          disabled={disable}
+          onClick={ResetButton}
+        >
           Reset
         </button>
 
