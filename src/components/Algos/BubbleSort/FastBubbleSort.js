@@ -24,6 +24,7 @@ function BubbleSortDisplayFast() {
   }
 
   function ResetButton() {
+    SetButtonText("Start");
     const arr = [...arrValues];
     i = 0;
     j = 0;

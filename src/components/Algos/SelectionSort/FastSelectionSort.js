@@ -4,8 +4,13 @@ import RandomArr from "../FunctionsForAll/RandomArr";
 import DrawFast from "../FunctionsForAll/DrawFastArray";
 import { wait } from "@testing-library/user-event/dist/utils";
 
+let i = 0;
+let j;
+let minIndex;
+
 function SelectionSortDisplayFast() {
   const [arrValues, setArrValues] = useState(RandomArr(100));
+  const [drawArrValues, setDrawArrValues] = useState([...arrValues]);
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={DrawFast} height={600} width={1000} />
   );
@@ -21,9 +26,12 @@ function SelectionSortDisplayFast() {
   }
 
   function ResetButton() {
-    const arr = [...arrValues];
+    SetButtonText("Start");
+    const array = [...arrValues];
+    setDrawArrValues(array);
+    i = 0;
     setCanvas(
-      <Canvas array={[...arr]} draw={DrawFast} height={600} width={1000} />
+      <Canvas array={[...array]} draw={DrawFast} height={600} width={1000} />
     );
   }
 
@@ -39,7 +47,9 @@ function SelectionSortDisplayFast() {
 
   function NewArray() {
     const array = RandomArr(100);
+    i = 0;
     setArrValues(array);
+    setDrawArrValues(array);
     SetButtonText("Start");
     setCanvas(
       <Canvas array={[...array]} draw={DrawFast} height={600} width={1000} />
@@ -47,30 +57,18 @@ function SelectionSortDisplayFast() {
   }
 
   const drawSorted = async (context) => {
-    const arr = [...arrValues];
+    const arr = [...drawArrValues];
+    console.log("i" + i);
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-    for (let i = 0; i < arr.length - 1; i++) {
-      let minIndex = i;
-      for (let j = i + 1; j < arr.length; j++) {
+    console.log("pre " + arr);
+    for (i; i < arr.length - 1; i++) {
+      minIndex = i;
+      for (j = i + 1; j < arr.length; j++) {
         if (arr[j] < arr[minIndex]) {
           minIndex = j;
         }
-        // context.clearRect(j * 10, 0, 8, 600);
-        // context.fillStyle = "#00bc8c";
-        // context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
-
-        // context.clearRect((j - 1) * 10, 0, 8, 600);
-        // context.fillStyle = "#adb5bd";
-        // context.fillRect(
-        //   (j - 1) * 10,
-        //   600 - 50 * arr[j - 1],
-        //   8,
-        //   50 * arr[j - 1]
-        // );
-        // await wait(20);
       }
-      // await waitForPress();
+
       if (arr[i] > arr[minIndex]) {
         context.clearRect(minIndex * 10, 0, 8, 600);
         context.fillStyle = "#e74c3c";
@@ -83,10 +81,11 @@ function SelectionSortDisplayFast() {
         context.clearRect(i * 10, 0, 8, 600);
         context.fillStyle = "#e74c3c";
         context.fillRect(i * 10, 600 - 50 * arr[i], 8, 50 * arr[i]);
-        await wait(40);
       }
+      await wait(40);
 
       [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+
       context.clearRect(minIndex * 10, 0, 8, 600);
       context.fillStyle = "#00bc8c";
       context.fillRect(
@@ -99,6 +98,31 @@ function SelectionSortDisplayFast() {
       context.fillStyle = "#00bc8c";
       context.fillRect(i * 10, 600 - 50 * arr[i], 8, 50 * arr[i]);
       await wait(20);
+
+      if (arr[i] < arr[minIndex]) {
+        context.clearRect(minIndex * 10, 0, 8, 600);
+        context.fillStyle = "#adb5bd";
+        context.fillRect(
+          minIndex * 10,
+          600 - 50 * arr[minIndex],
+          8,
+          50 * arr[minIndex]
+        );
+        console.log("post " + arr);
+      }
+      //fills last piece green
+      if (i === arr.length - 2) {
+        context.clearRect((i + 1) * 10, 0, 8, 600);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(
+          (i + 1) * 10,
+          600 - 50 * arr[i + 1],
+          8,
+          50 * arr[i + 1]
+        );
+      }
+      setDrawArrValues(arr);
+      if (buttonTextRef.current === "Start") return;
     }
   };
 
