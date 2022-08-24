@@ -73,8 +73,10 @@ function SelectionSortDisplay() {
         context.clearRect(i * 60, 0, 58, 300);
         context.fillStyle = "#e74c3c";
         context.fillRect(i * 60, 300 - 30 * arr[i], 58, 30 * arr[i]);
-        await wait(300);
 
+        await wait(150);
+
+        //greys out j after each step
         context.clearRect(j * 60, 0, 58, 300);
         context.fillStyle = "#adb5bd";
         context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
@@ -90,10 +92,8 @@ function SelectionSortDisplay() {
           58,
           30 * arr[minIndex]
         );
-
-        await waitForPress();
       }
-
+      await waitForPress();
       [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
 
       context.clearRect(minIndex * 60, 0, 58, 300);
@@ -108,21 +108,9 @@ function SelectionSortDisplay() {
       context.fillStyle = "#00bc8c";
       context.fillRect(i * 60, 300 - 30 * arr[i], 58, 30 * arr[i]);
 
-      //fills last piece
-      if (i === arr.length - 2) {
-        context.clearRect((i + 1) * 60, 0, 58, 300);
-        context.fillStyle = "#00bc8c";
-        context.fillRect(
-          (i + 1) * 60,
-          300 - 30 * arr[i + 1],
-          58,
-          30 * arr[i + 1]
-        );
-      }
-
       await waitForPress();
 
-      //clears green left in array
+      //clears green left in array by swap
       if (arr[i] < arr[minIndex]) {
         context.clearRect(minIndex * 60, 0, 58, 300);
         context.fillStyle = "#adb5bd";
@@ -131,6 +119,17 @@ function SelectionSortDisplay() {
           300 - 30 * arr[minIndex],
           58,
           30 * arr[minIndex]
+        );
+      }
+      //fills last piece green
+      if (i === arr.length - 2) {
+        context.clearRect((i + 1) * 60, 0, 58, 300);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(
+          (i + 1) * 60,
+          300 - 30 * arr[i + 1],
+          58,
+          30 * arr[i + 1]
         );
       }
     }
