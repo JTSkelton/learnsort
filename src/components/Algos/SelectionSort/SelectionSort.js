@@ -57,26 +57,30 @@ function SelectionSortDisplay() {
 
     for (let i = 0; i < arr.length - 1; i++) {
       let minIndex = i;
+      console.log("i " + i);
+
+      console.log(arr.length - 1);
       for (let j = i + 1; j < arr.length; j++) {
         if (arr[j] < arr[minIndex]) {
           minIndex = j;
+          console.log("mi " + minIndex);
         }
 
         context.clearRect(j * 60, 0, 58, 300);
         context.fillStyle = "#00bc8c";
         context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
 
-        context.clearRect((j - 1) * 60, 0, 58, 300);
-        context.fillStyle = "#adb5bd";
-        context.fillRect(
-          (j - 1) * 60,
-          300 - 30 * arr[j - 1],
-          58,
-          30 * arr[j - 1]
-        );
+        context.clearRect(i * 60, 0, 58, 300);
+        context.fillStyle = "#e74c3c";
+        context.fillRect(i * 60, 300 - 30 * arr[i], 58, 30 * arr[i]);
         await wait(300);
+
+        context.clearRect(j * 60, 0, 58, 300);
+        context.fillStyle = "#adb5bd";
+        context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
       }
-      // await waitForPress();
+
+      // highlights current min index in red
       if (arr[i] > arr[minIndex]) {
         context.clearRect(minIndex * 60, 0, 58, 300);
         context.fillStyle = "#e74c3c";
@@ -86,13 +90,12 @@ function SelectionSortDisplay() {
           58,
           30 * arr[minIndex]
         );
-        context.clearRect(i * 60, 0, 58, 300);
-        context.fillStyle = "#e74c3c";
-        context.fillRect(i * 60, 300 - 30 * arr[i], 58, 30 * arr[i]);
+
         await waitForPress();
       }
 
       [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+
       context.clearRect(minIndex * 60, 0, 58, 300);
       context.fillStyle = "#00bc8c";
       context.fillRect(
@@ -104,7 +107,32 @@ function SelectionSortDisplay() {
       context.clearRect(i * 60, 0, 58, 300);
       context.fillStyle = "#00bc8c";
       context.fillRect(i * 60, 300 - 30 * arr[i], 58, 30 * arr[i]);
+
+      //fills last piece
+      if (i === arr.length - 2) {
+        context.clearRect((i + 1) * 60, 0, 58, 300);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(
+          (i + 1) * 60,
+          300 - 30 * arr[i + 1],
+          58,
+          30 * arr[i + 1]
+        );
+      }
+
       await waitForPress();
+
+      //clears green left in array
+      if (arr[i] < arr[minIndex]) {
+        context.clearRect(minIndex * 60, 0, 58, 300);
+        context.fillStyle = "#adb5bd";
+        context.fillRect(
+          minIndex * 60,
+          300 - 30 * arr[minIndex],
+          58,
+          30 * arr[minIndex]
+        );
+      }
     }
   };
 

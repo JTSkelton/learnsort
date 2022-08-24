@@ -3,24 +3,15 @@ import React, { useState } from "react";
 import Canvas from "../FunctionsForAll/Canvas";
 import Draw from "../FunctionsForAll/DrawArray";
 
-function InsertionSort(arr, n) {
-  let i, key, j;
-  for (i = 1; i < n; i++) {
+function InsertionSort(arr) {
+  let key, j;
+  for (let i = 1; i < arr.length; i++) {
     key = arr[i];
     j = i - 1;
 
     while (j >= 0 && arr[j] > key) {
-      console.log("Pre " + arr);
-      console.log("Pre j " + arr[j]);
-
-      console.log("Pre +1 " + arr[j + 1]);
-
       arr[j + 1] = arr[j];
-      console.log("Post " + arr);
-      console.log("Post j " + arr[j]);
-      console.log("Post +1 " + arr[j + 1]);
-
-      j = j - 1;
+      j--;
     }
     arr[j + 1] = key;
   }
