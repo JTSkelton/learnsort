@@ -59,7 +59,35 @@ function InsertionSortDisplay() {
     for (i = 1; i < n; i++) {
       key = arr[i];
       j = i - 1;
-
+      console.log("i " + i);
+      console.log("key " + key);
+      console.log("j " + j);
+      if (arr[j] <= arr[j + 1]) {
+        context.clearRect((j + 1) * 60, 0, 58, 300);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(
+          (j + 1) * 60,
+          300 - 30 * arr[j + 1],
+          58,
+          30 * arr[j + 1]
+        );
+        context.clearRect(j * 60, 0, 58, 300);
+        context.fillStyle = "#f39c12";
+        context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
+        await waitForPress();
+        context.clearRect((j + 1) * 60, 0, 58, 300);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(
+          (j + 1) * 60,
+          300 - 30 * arr[j + 1],
+          58,
+          30 * arr[j + 1]
+        );
+        context.clearRect(j * 60, 0, 58, 300);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(j * 60, 300 - 30 * arr[j], 58, 30 * arr[j]);
+        await waitForPress();
+      }
       while (j >= 0 && arr[j] > key) {
         if (arr[j] > arr[j + 1]) {
           context.clearRect((j + 1) * 60, 0, 58, 300);
@@ -104,6 +132,14 @@ function InsertionSortDisplay() {
         j = j - 1;
 
         await waitForPress();
+        context.clearRect((j + 1) * 60, 0, 58, 300);
+        context.fillStyle = "#00bc8c";
+        context.fillRect(
+          (j + 1) * 60,
+          300 - 30 * arr[j + 1],
+          58,
+          30 * arr[j + 1]
+        );
       }
       arr[j + 1] = key;
     }

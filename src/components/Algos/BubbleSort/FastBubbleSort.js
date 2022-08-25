@@ -12,7 +12,7 @@ function BubbleSortDisplayFast() {
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={DrawFast} height={600} width={1000} />
   );
-
+  const [disable, setDisable] = useState(false);
   const [ButtonText, SetButtonText] = useState("Start");
   const buttonTextRef = useRef(ButtonText);
   useEffect(() => {
@@ -35,9 +35,11 @@ function BubbleSortDisplayFast() {
 
   const ToggleButtonText = async () => {
     if (ButtonText === "Stop") {
+      setDisable(false);
       SetButtonText("Start");
     } else if (ButtonText === "Start") {
       SetButtonText("Stop");
+      setDisable(true);
       await wait(50);
       await SortThatArray();
     }
@@ -124,7 +126,12 @@ function BubbleSortDisplayFast() {
   return (
     <div className="bubbleSortFast">
       <div className="card-body">
-        <button type="button" className="btn btn-success" onClick={NewArray}>
+        <button
+          type="button"
+          className="btn btn-success"
+          disabled={disable}
+          onClick={NewArray}
+        >
           New Array
         </button>
 
@@ -135,7 +142,12 @@ function BubbleSortDisplayFast() {
         >
           {ButtonText}
         </button>
-        <button type="button" className="btn btn-success" onClick={ResetButton}>
+        <button
+          type="button"
+          className="btn btn-success"
+          disabled={disable}
+          onClick={ResetButton}
+        >
           Reset
         </button>
 

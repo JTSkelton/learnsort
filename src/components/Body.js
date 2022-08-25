@@ -149,7 +149,7 @@ function Body() {
         </div>
 
         <div className={show === 11 ? "active-algo" : "algo"}>
-          Selection Sort
+          Selection Sort Fast
           <div butt>
             <button
               type="button"
