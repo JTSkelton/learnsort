@@ -53,7 +53,8 @@ function btnResolver() {
 }
 
 function MergeSortDisplay() {
-  const [arrValues, setArrValues] = useState(RandomArr(5));
+  // const [arrValues, setArrValues] = useState([6, 8, 3, 7, 1]);
+  const [arrValues, setArrValues] = useState(RandomArr(6));
   const [sortedArrValues, setSorted] = useState([]);
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={Draw} height={300} width={600} />
@@ -66,7 +67,8 @@ function MergeSortDisplay() {
   }
 
   function NewArray() {
-    const array = RandomArr(5);
+    const array = RandomArr(6);
+    // const array = [6, 8, 3, 7, 1];
     setArrValues(array);
     setSorted(" ");
     setCanvas(
@@ -173,7 +175,7 @@ function MergeSortDisplay() {
 
   const drawSorted = async (context) => {
     const array = [...arrValues];
-    const refArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const refArray = [0, 1, 2, 3, 4, 5];
 
     const mergeSort = async (array, refArray) => {
       if (array.length <= 1) {
@@ -204,21 +206,26 @@ function MergeSortDisplay() {
       const output = [];
       let leftIndex = 0;
       let rightIndex = 0;
-      let tempLeft = 0;
 
       while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
+        console.log(rightArr.length);
+        let animateStartIndex;
         let leftElement = leftArr[leftIndex];
-        console.log("1) Left Element " + leftElement);
-        console.log("2) Left Index " + leftIndex);
         let rightElement = rightArr[rightIndex];
         let animateEndIndex = rightArrayRef[rightIndex];
+        console.log("1) Left Element " + leftElement);
+        console.log("2) Left Index " + leftIndex);
+
         console.log("6) AnimateEndIndex: " + animateEndIndex);
         console.log("3) Right Element " + rightElement);
         console.log("4) Right Index " + rightIndex);
-        let animateStartIndex = animateEndIndex - 1;
-        console.log("5) AnimateStartIndex: " + animateStartIndex);
+        if (rightIndex === 0) {
+          animateStartIndex = leftArrayRef[leftIndex];
+        } else if (leftIndex > 0) {
+          animateStartIndex = leftArrayRef[leftIndex];
+        } else animateStartIndex = rightArrayRef[rightIndex] - 1;
 
-        console.log("7) Output " + output);
+        console.log("5) AnimateStartIndex: " + animateStartIndex);
 
         animateHighlight(
           context,
@@ -228,7 +235,7 @@ function MergeSortDisplay() {
           rightElement
         );
         await wait(300);
-        // await waitForPress();
+        await waitForPress();
 
         if (leftElement <= rightElement) {
           animateNonSwap(
@@ -239,9 +246,9 @@ function MergeSortDisplay() {
             rightElement
           );
           output.push(leftElement);
+
           leftIndex++;
-          // tempLeft = animateEndIndex - 1;
-          console.log("8) Left Index " + leftIndex);
+
           await wait(300);
           // await waitForPress();
         } else {
@@ -254,14 +261,17 @@ function MergeSortDisplay() {
           );
           rightIndex++;
           output.push(rightElement);
-          //temp left needs to follow the swap index
-          // tempLeft = animateEndIndex - 1;
-          console.log("9) TempLeft " + tempLeft);
+
           await wait(300);
           // await waitForPress();
         }
+        if (leftElement > rightElement && leftIndex === leftArr.length) {
+          leftIndex++;
+        }
       }
-
+      console.log("7) Output " + output);
+      console.log("Left Slice " + leftArr.slice(leftIndex));
+      console.log("Right Slice " + rightArr.slice(rightIndex));
       console.log(
         "10) Returned Array " +
           [

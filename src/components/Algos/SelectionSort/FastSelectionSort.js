@@ -43,7 +43,7 @@ function SelectionSortDisplayFast() {
     } else if (ButtonText === "Start") {
       SetButtonText("Stop");
       setDisable(true);
-      await wait(50);
+      // await wait(50);
       await SortThatArray();
     }
   };

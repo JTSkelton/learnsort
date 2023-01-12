@@ -9,6 +9,7 @@ let j = 0;
 
 function BubbleSortDisplayFast() {
   const [arrValues, setArrValues] = useState(RandomArr(100));
+  const [drawArrValues, setDrawArrValues] = useState([...arrValues]);
   const [canvas, setCanvas] = useState(
     <Canvas array={[...arrValues]} draw={DrawFast} height={600} width={1000} />
   );
@@ -26,6 +27,7 @@ function BubbleSortDisplayFast() {
   function ResetButton() {
     SetButtonText("Start");
     const arr = [...arrValues];
+    setDrawArrValues(arr);
     i = 0;
     j = 0;
     setCanvas(
@@ -50,6 +52,7 @@ function BubbleSortDisplayFast() {
     i = 0;
     j = 0;
     setArrValues(array);
+    setDrawArrValues(array);
     SetButtonText("Start");
     setCanvas(
       <Canvas array={[...array]} draw={DrawFast} height={600} width={1000} />
@@ -57,8 +60,7 @@ function BubbleSortDisplayFast() {
   }
 
   const drawSorted = async (context) => {
-    const arr = [...arrValues];
-    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const arr = [...drawArrValues];
     for (i; i < arr.length - 1; i++) {
       for (j; j < arr.length - 1 - i; j++) {
         if (buttonTextRef.current === "Start") return;
@@ -117,7 +119,9 @@ function BubbleSortDisplayFast() {
           context.fillStyle = "#00bc8c";
           context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
         }
-        await wait(10);
+        await wait(5);
+        setDrawArrValues(arr);
+        if (buttonTextRef.current === "Start") return;
       }
       j = 0;
     }

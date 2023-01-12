@@ -13,6 +13,7 @@ function InsertionSortDisplayFast() {
   );
   const [drawArrValues, setDrawArrValues] = useState([...arrValues]);
   const [disable, setDisable] = useState(false);
+  const [disableStart, setDisableStart] = useState(false);
   const [ButtonText, SetButtonText] = useState("Start");
   const buttonTextRef = useRef(ButtonText);
   useEffect(() => {
@@ -34,12 +35,12 @@ function InsertionSortDisplayFast() {
 
   const ToggleButtonText = async () => {
     if (ButtonText === "Stop") {
+      setDisableStart(true);
       setDisable(false);
       SetButtonText("Start");
     } else if (ButtonText === "Start") {
       SetButtonText("Stop");
-      setDisable(true);
-      await wait(50);
+      await wait(150);
       await SortThatArray();
     }
   };
@@ -58,7 +59,7 @@ function InsertionSortDisplayFast() {
   const drawSorted = async (context) => {
     const arr = [...drawArrValues];
     const n = arr.length;
-    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    // const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     let key, j;
     for (i; i < n; i++) {
       key = arr[i];
@@ -94,10 +95,14 @@ function InsertionSortDisplayFast() {
         context.fillRect(j * 10, 600 - 50 * arr[j], 8, 50 * arr[j]);
         await wait(10);
         j = j - 1;
+        setDrawArrValues(arr);
       }
       arr[j + 1] = key;
-      setDrawArrValues(arr);
-      if (buttonTextRef.current === "Start") return;
+      // setDrawArrValues(arr);
+      if (buttonTextRef.current === "Start") {
+        setDisableStart(false);
+        return;
+      }
     }
   };
 
@@ -116,6 +121,7 @@ function InsertionSortDisplayFast() {
         <button
           type="button"
           className="btn btn-success"
+          disabled={disableStart}
           onClick={ToggleButtonText}
         >
           {ButtonText}
